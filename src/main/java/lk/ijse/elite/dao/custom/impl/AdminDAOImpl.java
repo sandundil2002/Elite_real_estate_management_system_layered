@@ -30,7 +30,13 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean save(Admin dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.sql("INSERT INTO admin VALUES (?,?,?,?,?,?)",dto.getAdmin_id(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getPassword(),dto.getEmail());
+        return SQLUtil.sql("INSERT INTO admin VALUES (?,?,?,?,?,?)",
+                dto.getAdmin_id(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getPassword(),
+                dto.getEmail());
     }
 
     public boolean searchAdminPassword(String string) throws SQLException, ClassNotFoundException {
@@ -47,12 +53,16 @@ public class AdminDAOImpl implements AdminDAO {
     public Admin search(String id) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin WHERE Admin_id=?",id);
         resultSet.next();
-        return new Admin(id+ " ",resultSet.getString("name"),resultSet.getString("otp"),resultSet.getString("mobile"),resultSet.getString("password"),resultSet.getString("email"));
+            return new Admin(id+ " ",resultSet.getString("name"),
+                    resultSet.getString("otp"),
+                    resultSet.getString("mobile"),
+                    resultSet.getString("password"),
+                    resultSet.getString("email"));
     }
 
     @Override
-    public void delete(String id) throws SQLException, ClassNotFoundException {
-
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
     }
 
     @Override
