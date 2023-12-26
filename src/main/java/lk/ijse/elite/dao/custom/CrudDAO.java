@@ -3,10 +3,10 @@ package lk.ijse.elite.dao.custom;
 import lk.ijse.elite.dao.SuperDAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CrudDAO<T> extends SuperDAO {
-    ArrayList<T> getAll() throws SQLException,ClassNotFoundException;
+    List<T> loadAll() throws SQLException,ClassNotFoundException;
 
     boolean save(T dto) throws SQLException,ClassNotFoundException;
 

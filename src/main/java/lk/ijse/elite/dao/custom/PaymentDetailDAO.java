@@ -1,4 +1,6 @@
 package lk.ijse.elite.dao.custom;
 
-public interface PaymentDetailDAO {
+import lk.ijse.elite.entity.PaymentDetail;
+
+public interface PaymentDetailDAO extends CrudDAO<PaymentDetail> {
 }

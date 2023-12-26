@@ -1,4 +1,6 @@
 package lk.ijse.elite.dao.custom;
 
-public interface AgentDAO {
+import lk.ijse.elite.entity.Agent;
+
+public interface AgentDAO extends CrudDAO<Agent>{
 }

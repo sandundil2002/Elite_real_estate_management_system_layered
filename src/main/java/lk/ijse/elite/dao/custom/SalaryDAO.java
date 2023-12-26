@@ -1,4 +1,6 @@
 package lk.ijse.elite.dao.custom;
 
-public interface SalaryDAO {
+import lk.ijse.elite.entity.Salary;
+
+public interface SalaryDAO extends CrudDAO<Salary> {
 }

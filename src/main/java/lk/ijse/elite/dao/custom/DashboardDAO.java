@@ -1,4 +1,6 @@
 package lk.ijse.elite.dao.custom;
 
-public interface DashboardDAO {
+import lk.ijse.elite.entity.Today;
+
+public interface DashboardDAO extends CrudDAO<Today> {
 }

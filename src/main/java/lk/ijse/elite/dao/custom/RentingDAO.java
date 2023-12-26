@@ -1,4 +1,6 @@
 package lk.ijse.elite.dao.custom;
 
-public interface RentingDAO {
+import lk.ijse.elite.entity.Renting;
+
+public interface RentingDAO extends CrudDAO<Renting> {
 }
