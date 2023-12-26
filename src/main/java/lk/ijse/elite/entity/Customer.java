@@ -1,12 +1,14 @@
-package lk.ijse.elite.model.dto;
+package lk.ijse.elite.entity;
 
 import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 
-public class AgentDTO {
-    private String agent_id;
+public class Customer {
+    private String customer_id;
+    private String shedule_id;
     private String name;
     private String address;
     private String mobile;

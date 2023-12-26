@@ -1,4 +1,4 @@
-package lk.ijse.elite.model.dto;
+package lk.ijse.elite.entity;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 
-public class PropertyDTO {
+public class Property {
     private String propertyId;
     private String agentId;
     private String price;

@@ -1,11 +1,12 @@
-package lk.ijse.elite.model.dto;
+package lk.ijse.elite.entity;
+
 import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 
-public class PlaceOrderDTO {
+public class PlaceOrder {
     private String paymentId;
     private String customerId;
     private String propertyId;

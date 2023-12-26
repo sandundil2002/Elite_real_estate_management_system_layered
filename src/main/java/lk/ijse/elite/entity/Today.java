@@ -1,4 +1,4 @@
-package lk.ijse.elite.model.dto;
+package lk.ijse.elite.entity;
 
 import lombok.*;
 
@@ -6,11 +6,9 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 
-public class CustomerDTO {
-    private String customer_id;
+public class Today {
     private String shedule_id;
     private String name;
-    private String address;
+    private String time;
     private String mobile;
-    private String email;
 }

@@ -1,4 +1,4 @@
-package lk.ijse.elite.model.dto;
+package lk.ijse.elite.entity;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 
-public class EmployeeDTO {
+public class Employee {
     private String empid;
     private String adid;
     private String name;
