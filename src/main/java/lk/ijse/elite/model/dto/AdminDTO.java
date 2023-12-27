@@ -9,7 +9,7 @@ import lombok.*;
 public class AdminDTO {
     private String Admin_id;
     private String Name;
-    private String Address;
+    private String Otp;
     private String Mobile;
     private String Email;
     private String Password;
