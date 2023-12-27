@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class MaintainBOImpl {
+import lk.ijse.elite.bo.custom.MaintainBO;
+
+public class MaintainBOImpl implements MaintainBO {
 }

@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface ScheduleBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface ScheduleBO extends SuperBO {
 }

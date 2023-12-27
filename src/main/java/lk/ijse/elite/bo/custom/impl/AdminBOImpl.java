@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class AdminBOImpl {
+import lk.ijse.elite.bo.custom.AdminBO;
+
+public class AdminBOImpl implements AdminBO {
 }

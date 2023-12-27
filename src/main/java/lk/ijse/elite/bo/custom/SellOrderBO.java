@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface SellOrderBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface SellOrderBO extends SuperBO {
 }

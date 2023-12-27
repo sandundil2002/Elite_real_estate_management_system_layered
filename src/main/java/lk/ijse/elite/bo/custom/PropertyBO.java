@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface PropertyBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface PropertyBO extends SuperBO {
 }

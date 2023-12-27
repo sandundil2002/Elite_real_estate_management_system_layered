@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface PaymentBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface PaymentBO extends SuperBO {
 }

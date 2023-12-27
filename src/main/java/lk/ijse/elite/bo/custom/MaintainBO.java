@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface MaintainBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface MaintainBO extends SuperBO {
 }

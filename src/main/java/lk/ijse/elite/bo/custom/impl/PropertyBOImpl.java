@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class PropertyBOImpl {
+import lk.ijse.elite.bo.custom.PropertyBO;
+
+public class PropertyBOImpl implements PropertyBO {
 }

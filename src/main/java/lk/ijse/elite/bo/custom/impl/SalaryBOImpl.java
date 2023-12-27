@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class SalaryBOImpl {
+import lk.ijse.elite.bo.custom.SalaryBO;
+
+public class SalaryBOImpl implements SalaryBO {
 }

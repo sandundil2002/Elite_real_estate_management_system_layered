@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class PaymentBOImpl {
+import lk.ijse.elite.bo.custom.PaymentBO;
+
+public class PaymentBOImpl implements PaymentBO {
 }

@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom;
 
-public interface RentingBO {
+import lk.ijse.elite.bo.SuperBO;
+
+public interface RentingBO extends SuperBO {
 }

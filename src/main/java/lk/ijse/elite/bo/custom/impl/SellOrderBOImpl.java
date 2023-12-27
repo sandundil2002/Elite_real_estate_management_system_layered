@@ -1,4 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
-public class SellOrderBOImpl {
+import lk.ijse.elite.bo.custom.SellOrderBO;
+
+public class SellOrderBOImpl implements SellOrderBO {
 }
