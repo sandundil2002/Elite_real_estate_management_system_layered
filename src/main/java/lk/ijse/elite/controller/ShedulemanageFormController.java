@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import lk.ijse.elite.model.dto.SheduleDTO;
+import lk.ijse.elite.model.dto.ScheduleDTO;
 import lk.ijse.elite.model.dto.tm.SheduleTM;
 import lk.ijse.elite.model.ScheduleModel;
 import java.io.IOException;
@@ -83,9 +83,9 @@ public class ShedulemanageFormController {
         ObservableList<SheduleTM> obList = FXCollections.observableArrayList();
 
         try{
-            List<SheduleDTO> dtoList = model.loadAllShedules();
+            List<ScheduleDTO> dtoList = model.loadAllShedules();
 
-            for(SheduleDTO dto : dtoList){
+            for(ScheduleDTO dto : dtoList){
                 Button Completed = new Button("Complete");
                 Button Cansel = new Button("Cansel");
                 Completed.setCursor(Cursor.HAND);

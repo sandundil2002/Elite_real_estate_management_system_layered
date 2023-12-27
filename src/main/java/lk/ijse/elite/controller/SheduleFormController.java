@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lk.ijse.elite.model.dto.AdminDTO;
-import lk.ijse.elite.model.dto.SheduleDTO;
+import lk.ijse.elite.model.dto.ScheduleDTO;
 import lk.ijse.elite.model.AdminModel;
 import lk.ijse.elite.model.ScheduleModel;
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class SheduleFormController {
             return;
         }
 
-        var dto = new SheduleDTO(shedule_id, admin_id, date, time, status);
+        var dto = new ScheduleDTO(shedule_id, admin_id, date, time, status);
         var model = new ScheduleModel();
 
         try {
@@ -89,7 +89,7 @@ public class SheduleFormController {
             return;
         }
 
-        var dto = new SheduleDTO(shedule_id, admin_id, date, time, status);
+        var dto = new ScheduleDTO(shedule_id, admin_id, date, time, status);
         var model = new ScheduleModel();
 
         try {
@@ -110,7 +110,7 @@ public class SheduleFormController {
 
         try{
             var scheduleModel = new ScheduleModel();
-            SheduleDTO dto = model.searchShedule(shedule_id);
+            ScheduleDTO dto = model.searchShedule(shedule_id);
             if(dto != null) {
                 boolean isDeleted = model.deleteShedule(shedule_id);
                 if (isDeleted) {

@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.model.dto.CustomerDTO;
-import lk.ijse.elite.model.dto.SheduleDTO;
+import lk.ijse.elite.model.dto.ScheduleDTO;
 import lk.ijse.elite.model.CustomerModel;
 import lk.ijse.elite.model.ScheduleModel;
 import java.sql.SQLException;
@@ -191,9 +191,9 @@ public class CustomerManageFormController {
     private void loadAllShedule() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<SheduleDTO> sheList = ScheduleModel.loadAllSchedule();
+            List<ScheduleDTO> sheList = ScheduleModel.loadAllSchedule();
 
-            for (SheduleDTO sheduleDto  : sheList) {
+            for (ScheduleDTO sheduleDto  : sheList) {
                 obList.add(sheduleDto.getScheduleId());
             }
             cmbSheduleid.setItems(obList);

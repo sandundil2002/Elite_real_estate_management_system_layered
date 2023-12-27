@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 
-public class SheduleDTO {
+public class ScheduleDTO {
     private String ScheduleId;
     private String AdminId;
     private String Date;

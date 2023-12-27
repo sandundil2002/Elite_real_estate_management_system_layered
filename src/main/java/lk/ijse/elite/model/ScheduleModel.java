@@ -1,6 +1,6 @@
 package lk.ijse.elite.model;
 
-import lk.ijse.elite.model.dto.SheduleDTO;
+import lk.ijse.elite.model.dto.ScheduleDTO;
 import lk.ijse.elite.util.SQLUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleModel {
-    public static List<SheduleDTO> loadAllSchedule() throws SQLException, ClassNotFoundException {
+    public static List<ScheduleDTO> loadAllSchedule() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM schedule");
-        List<SheduleDTO> ScheduleList = new ArrayList<>();
+        List<ScheduleDTO> ScheduleList = new ArrayList<>();
 
         while (resultSet.next()) {
-            ScheduleList.add(new SheduleDTO(
+            ScheduleList.add(new ScheduleDTO(
                     resultSet.getString(1),
                     resultSet.getString(4),
                     resultSet.getString(3),
@@ -29,7 +29,7 @@ public class ScheduleModel {
         return resultSet.next() ? resultSet.getInt(1) : 0;
     }
 
-    public boolean saveShedule(SheduleDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean saveShedule(ScheduleDTO dto) throws SQLException, ClassNotFoundException {
         return SQLUtil.sql("INSERT INTO schedule VALUES(?,?,?,?,?)",
                 dto.getScheduleId(),
                 dto.getAdminId(),
@@ -39,7 +39,7 @@ public class ScheduleModel {
         );
     }
 
-    public boolean updateShedule(SheduleDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean updateShedule(ScheduleDTO dto) throws SQLException, ClassNotFoundException {
         return SQLUtil.sql("UPDATE schedule SET Admin_id=?, Date=?, Time=?, Status=? WHERE Shedule_id=?",
                 dto.getAdminId(),
                 dto.getDate(),
@@ -48,7 +48,7 @@ public class ScheduleModel {
                 dto.getScheduleId());
     }
 
-    public SheduleDTO searchShedule(String id) throws SQLException, ClassNotFoundException {
+    public ScheduleDTO searchShedule(String id) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM schedule WHERE Shedule_id=?", id);
 
         if (resultSet.next()) {
@@ -57,7 +57,7 @@ public class ScheduleModel {
             String date = resultSet.getString(3);
             String time = resultSet.getString(4);
             String status = resultSet.getString(5);
-            return new SheduleDTO(shedule_id, admin_id, date, time,status);
+            return new ScheduleDTO(shedule_id, admin_id, date, time,status);
         }
         return null;
     }
@@ -66,12 +66,12 @@ public class ScheduleModel {
         return SQLUtil.sql("DELETE FROM schedule WHERE Shedule_id=?", id);
     }
 
-    public List<SheduleDTO> loadAllShedules() throws SQLException, ClassNotFoundException {
+    public List<ScheduleDTO> loadAllShedules() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM schedule");
-        List<SheduleDTO> sheduleList = new ArrayList<>();
+        List<ScheduleDTO> sheduleList = new ArrayList<>();
 
         while (resultSet.next()) {
-            sheduleList.add(new SheduleDTO(
+            sheduleList.add(new ScheduleDTO(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
