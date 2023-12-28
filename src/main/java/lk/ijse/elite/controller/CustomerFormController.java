@@ -12,9 +12,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.CustomerBO;
+import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.elite.model.dto.CustomerDTO;
 import lk.ijse.elite.model.dto.tm.CustomerTM;
-import lk.ijse.elite.model.CustomerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class CustomerFormController {
     public TableColumn colEmail;
     public TableView tblCustomer;
     public TableColumn colSheduleid;
+    CustomerBO customerBO = new CustomerBOImpl();
 
     public void initialize(){
         setCellValueFactory();
@@ -59,12 +61,10 @@ public class CustomerFormController {
     }
 
     private void loadAllCustomers(){
-        var model = new CustomerModel();
-
         ObservableList<CustomerTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDTO> dtoList = model.getAllCustomers();
+            List<CustomerDTO> dtoList = customerBO.loadAllCustomer();
 
             for (CustomerDTO dto : dtoList) {
                 obList.add(new CustomerTM(

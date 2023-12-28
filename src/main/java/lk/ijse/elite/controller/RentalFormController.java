@@ -11,14 +11,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.RentingBO;
+import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
 import lk.ijse.elite.model.dto.RentingDTO;
 import lk.ijse.elite.model.dto.tm.RentingTM;
-import lk.ijse.elite.model.RentingModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class RentalFormController {
     public TableColumn colRentId;
@@ -30,6 +30,7 @@ public class RentalFormController {
     public TableView tblRent;
     public TableColumn colMaintain;
     public TableColumn colDelete;
+    RentingBO rentingBO = new RentingBOImpl();
 
     public void initialize() throws SQLException {
         setCellValueFactories();
@@ -57,12 +58,10 @@ public class RentalFormController {
     }
 
     private void loadAllRentals() {
-        var model = new RentingModel();
-
         ObservableList<RentingTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<RentingDTO> dtoList = model.loadAllRentals();
+            List<RentingDTO> dtoList = rentingBO.loadAllRenting();
             for (RentingDTO dto : dtoList) {
                 Button Maintain = new Button("Maintain");
                 Button Delete = new Button("Delete");
@@ -96,7 +95,7 @@ public class RentalFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this Renting?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isDeleted = model.deleteRenting(dto.getRent_id());
+                            boolean isDeleted = rentingBO.deleteRenting(dto.getRent_id());
                             if (isDeleted){
                                 new Alert(Alert.AlertType.CONFIRMATION, "Renting has been deleted successfully").show();
                                 initialize();

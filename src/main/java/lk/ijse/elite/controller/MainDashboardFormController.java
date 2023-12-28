@@ -10,12 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lk.ijse.elite.db.DbConnection;
+import lk.ijse.elite.bo.custom.DashboardBO;
+import lk.ijse.elite.bo.custom.impl.DashboardBOImpl;
 import lk.ijse.elite.model.dto.TodayAppoinmentsDTO;
 import lk.ijse.elite.model.dto.tm.TodayAppointmentsTM;
-import lk.ijse.elite.model.DashboardModel;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import lk.ijse.elite.util.SQLUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,6 +33,7 @@ public class MainDashboardFormController {
     public Label lblTotalPro;
     public Label lblTotalApp;
     public BarChart<String, Number> barChart;
+    DashboardBO dashboardBO = new DashboardBOImpl();
 
     public void initialize() {
         loadTodayShedules();
@@ -53,16 +53,18 @@ public class MainDashboardFormController {
 
         try {
             populateChart(barChart);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void populateChart(BarChart<String, Number> barChart) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        ResultSet resultSet = preparedStatement.executeQuery();
+    private void populateChart(BarChart<String, Number> barChart) throws SQLException, ClassNotFoundException {
+//        Connection connection = DbConnection.getInstance().getConnection();
+//        String sql = "SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type";
+//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ResultSet resultSet = SQLUtil.sql("SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type");
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         while (resultSet.next()) {
             String propertyType = resultSet.getString("Type");
@@ -78,7 +80,7 @@ public class MainDashboardFormController {
 
     private int getTotalPropertiesCount() {
         try {
-            return DashboardModel.getTotalPropertiesCount();
+            return dashboardBO.getTotalPropertiesCount();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
@@ -89,7 +91,7 @@ public class MainDashboardFormController {
 
     private int getTotalAppointmentsCount() {
         try {
-            return DashboardModel.getTotalAppointmentsCount();
+            return dashboardBO.getTotalAppointmentsCount();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
@@ -106,12 +108,10 @@ public class MainDashboardFormController {
     }
 
     private void loadTodayShedules(){
-        var model = new DashboardModel();
-
         ObservableList<TodayAppointmentsTM> obList = FXCollections.observableArrayList();
 
         try{
-            List<TodayAppoinmentsDTO> dtoList = model.loadTodayShedules();
+            List<TodayAppoinmentsDTO> dtoList = dashboardBO.loadTodayShedules();
 
             for (TodayAppoinmentsDTO dto : dtoList) {
                 obList.add(new TodayAppointmentsTM(

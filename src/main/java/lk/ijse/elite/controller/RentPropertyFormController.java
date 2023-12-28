@@ -8,10 +8,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import lk.ijse.elite.model.CustomerModel;
-import lk.ijse.elite.model.PaymentModel;
-import lk.ijse.elite.model.PropertyModel;
-import lk.ijse.elite.model.RentingModel;
+import lk.ijse.elite.bo.custom.CustomerBO;
+import lk.ijse.elite.bo.custom.PaymentBO;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.RentingBO;
+import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
+import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
+import lk.ijse.elite.entity.*;
 import lk.ijse.elite.model.dto.*;
 
 import java.sql.SQLException;
@@ -27,6 +32,10 @@ public class RentPropertyFormController {
     public TextField txtpayId;
     public ChoiceBox cmdPaymethod;
     public ChoiceBox cmdDuration;
+    RentingBO rentingBO = new RentingBOImpl();
+    CustomerBO customerBO = new CustomerBOImpl();
+    PaymentBO paymentBO = new PaymentBOImpl();
+    PropertyBO propertyBO = new PropertyBOImpl();
 
     public void initialize(){
         loadAllProperty();
@@ -42,7 +51,7 @@ public class RentPropertyFormController {
 
         comProid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                PropertyDTO propertyDto = PropertyModel.searchProperty(t1.toString());
+                PropertyDTO propertyDto = propertyBO.searchProperty(t1.toString());
                 txtPropertyPrice.setText(propertyDto.getPrice());
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -53,7 +62,7 @@ public class RentPropertyFormController {
 
         comCusid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                CustomerDTO customerDto = CustomerModel.searchCustomer(t1.toString());
+                CustomerDTO customerDto = customerBO.searchCustomer(t1.toString());
                 txtCustomerName.setText(customerDto.getName());
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -80,13 +89,13 @@ public class RentPropertyFormController {
         String date = txtDate.getValue().toString();
         String duration = String.valueOf(cmdDuration.getValue());
 
-        var rentDto = new RentDTO(rentId,propertyId,customerId,date,duration);
-        var rentDetailDto = new RentingDetailDTO(rentId,propertyId,duration);
-        var paymentDto = new PaymentDTO(paymentId,customerId,propertyId,date,price,method);
-        var paymentDetailDto = new PaymentdetailDTO(propertyId,paymentId,method);
+        Rent rent = new Rent(rentId,propertyId,customerId,date,duration);
+        RentingDetail rentingDetail = new RentingDetail(rentId,propertyId,duration);
+        Payment payment = new Payment(paymentId,customerId,propertyId,date,price,method);
+        PaymentDetail paymentDetail = new PaymentDetail(propertyId,paymentId,method);
 
         try {
-            boolean isSuccess = RentingModel.isUpdated(rentDto,rentDetailDto,paymentDto,paymentDetailDto);
+            boolean isSuccess = rentingBO.isUpdated(rent,rentingDetail,payment,paymentDetail);
             if (isSuccess){
                 new Alert(Alert.AlertType.CONFIRMATION,"Rent Succesfull").show();
                 btnRentClearOnAction();
@@ -105,7 +114,7 @@ public class RentPropertyFormController {
     private void loadAllProperty() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<PropertyDTO> proList = PropertyModel.loadAllProperty();
+            List<PropertyDTO> proList = propertyBO.loadAllProperty();
 
             for (PropertyDTO propertyDto  : proList) {
                 obList.add(propertyDto.getPropertyId());
@@ -121,7 +130,7 @@ public class RentPropertyFormController {
     private void loadAllCustomer() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<CustomerDTO> cusList = CustomerModel.getAllCustomers();
+            List<CustomerDTO> cusList = customerBO.loadAllCustomer();
 
             for (CustomerDTO customerDto  : cusList) {
                 obList.add(customerDto.getCustomer_id());
@@ -136,10 +145,10 @@ public class RentPropertyFormController {
     }
 
     private void autoGenarateRentId() throws SQLException, ClassNotFoundException {
-        txtRentid.setText(new RentingModel().generateRentId());
+        txtRentid.setText(rentingBO.generateRentingId());
     }
 
     private void autoGenaratePaymentId() throws SQLException, ClassNotFoundException {
-        txtpayId.setText(new PaymentModel().generatePaymentId());
+        txtpayId.setText(paymentBO.generatePaymentId());
     }
 }

@@ -6,10 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.EmployeeBO;
+import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
+import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.model.dto.AdminDTO;
 import lk.ijse.elite.model.dto.EmployeeDTO;
-import lk.ijse.elite.model.AdminModel;
-import lk.ijse.elite.model.EmployeeModel;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -23,6 +25,8 @@ public class EmployeeManageformController {
     public JFXComboBox cmbAdminid;
     public JFXComboBox cmbEmployeeposition;
     public TextField txtAmount;
+    EmployeeBO employeeBO = new EmployeeBOImpl();
+    AdminBO adminBO = new AdminBOImpl();
 
     public void initialize(){
         try {
@@ -83,10 +87,9 @@ public class EmployeeManageformController {
         }
 
         var dto = new EmployeeDTO(eid,adid, name, address, mobile, position, sal);
-        var model = new EmployeeModel();
 
         try {
-            boolean isSaved = model.saveEmployee(dto);
+            boolean isSaved = employeeBO.saveEmployee(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Saved Succesfull").show();
                 initialize();
@@ -121,10 +124,9 @@ public class EmployeeManageformController {
         }
 
         var dto = new EmployeeDTO(eid,adid, name, address, mobile, position, sal);
-        var model = new EmployeeModel();
 
         try {
-            boolean isUpdated = model.updateEmployee(dto);
+            boolean isUpdated = employeeBO.updateEmployee(dto);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Update Succesfull!!!").show();
                 clearFields();
@@ -138,13 +140,11 @@ public class EmployeeManageformController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String eid = txtEmpid.getText();
-        var model = new EmployeeModel();
 
         try{
-            var employeeModel = new EmployeeModel();
-            EmployeeDTO dto = model.searchEmployee(eid);
+            EmployeeDTO dto = employeeBO.searchEmployee(eid);
             if(dto != null) {
-                boolean isDeleted = employeeModel.deleteEmployee(eid);
+                boolean isDeleted = employeeBO.deleteEmployee(eid);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee Delete Succesfull!!!").show();
                     clearFields();
@@ -162,10 +162,9 @@ public class EmployeeManageformController {
 
     public void btnSearchOnAction(ActionEvent actionEvent) {
         String eid = txtEmpid.getText();
-        
-        var model = new EmployeeModel();
+
         try {
-            EmployeeDTO dto = model.searchEmployee(eid);
+            EmployeeDTO dto = employeeBO.searchEmployee(eid);
 
             if(dto != null) {
                 fillFields(dto);
@@ -191,7 +190,7 @@ public class EmployeeManageformController {
     private void loadAllAdmin() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<AdminDTO> adList = AdminModel.loadAllAdmin();
+            List<AdminDTO> adList = adminBO.loadAllAdmin();
 
             for (AdminDTO adminDto  : adList) {
                 obList.add(adminDto.getAdmin_id());
@@ -230,6 +229,6 @@ public class EmployeeManageformController {
     }
 
     private void autoGenerateId() throws SQLException, ClassNotFoundException {
-        txtEmpid.setText(new EmployeeModel().generateEmployeeId());
+        txtEmpid.setText(employeeBO.generateEmployeeId());
     }
 }

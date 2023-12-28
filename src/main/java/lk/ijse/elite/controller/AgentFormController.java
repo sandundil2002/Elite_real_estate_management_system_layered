@@ -9,9 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.AgentBO;
+import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.model.dto.AgentDTO;
 import lk.ijse.elite.model.dto.tm.AgentTM;
-import lk.ijse.elite.model.AgentModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,6 +26,7 @@ public class AgentFormController {
     public TableColumn colMobile;
     public TableColumn colEmail;
     public TableView tblAgent;
+    AgentBO agentBO = new AgentBOImpl();
 
     public void initialize() throws SQLException {
         setCellValueFactory();
@@ -54,12 +56,10 @@ public class AgentFormController {
     }
 
     private void loadAllAgents(){
-        var model = new AgentModel();
-
         ObservableList<AgentTM> obList = FXCollections.observableArrayList();
 
         try{
-            List<AgentDTO> dtoList = model.loadAllAgents();
+            List<AgentDTO> dtoList = agentBO.loadAllAgent();
 
             for(AgentDTO dto : dtoList){
                 obList.add(new AgentTM(

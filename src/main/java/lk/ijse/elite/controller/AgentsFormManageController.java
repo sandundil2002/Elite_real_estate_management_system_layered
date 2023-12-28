@@ -3,8 +3,9 @@ package lk.ijse.elite.controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.AgentBO;
+import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.model.dto.AgentDTO;
-import lk.ijse.elite.model.AgentModel;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,7 @@ public class AgentsFormManageController {
     public TextField txtAddress;
     public TextField txtMobile;
     public TextField txtEmail;
+    AgentBO agentBO = new AgentBOImpl();
 
     public void initialize() {
         try {
@@ -36,10 +38,9 @@ public class AgentsFormManageController {
         }
 
         var dto = new AgentDTO(agentid, name, address, mobile, email);
-        var model = new AgentModel();
 
         try {
-            boolean isSaved = model.saveAgent(dto);
+            boolean isSaved = agentBO.saveAgent(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Added Succesfull").show();
                 clearFields();
@@ -72,10 +73,9 @@ public class AgentsFormManageController {
         }
 
         var dto = new AgentDTO(agentid, name, address, mobile, email);
-        var model = new AgentModel();
 
         try {
-            boolean isUpdated = model.updateAgent(dto);
+            boolean isUpdated = agentBO.updateAgent(dto);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Update Succesfull!!!").show();
                 clearFields();
@@ -89,10 +89,9 @@ public class AgentsFormManageController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String agentid = txtAgentid.getText();
-        var model = new AgentModel();
 
         try {
-            boolean isDeleted = model.deleteAgent(agentid);
+            boolean isDeleted = agentBO.deleteAgent(agentid);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Deleted Succesfull").show();
             }
@@ -104,7 +103,7 @@ public class AgentsFormManageController {
     }
 
     private void autoGenerateId() throws SQLException, ClassNotFoundException {
-        txtAgentid.setText(new AgentModel().generateAgentId());
+        txtAgentid.setText(agentBO.generateAgentId());
     }
 
     private boolean validateAgent(){

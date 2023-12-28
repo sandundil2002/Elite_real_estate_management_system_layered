@@ -7,10 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.EmployeeBO;
+import lk.ijse.elite.bo.custom.SalaryBO;
+import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
+import lk.ijse.elite.bo.custom.impl.SalaryBOImpl;
+import lk.ijse.elite.entity.Employee;
 import lk.ijse.elite.model.dto.EmployeeDTO;
 import lk.ijse.elite.model.dto.SalaryDTO;
-import lk.ijse.elite.model.EmployeeModel;
-import lk.ijse.elite.model.SalaryModel;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +25,8 @@ public class SalaryManageFormController {
     public JFXComboBox cmdPosition;
     public DatePicker dtpDate;
     public TextField txtAmount;
+    SalaryBO salaryBO = new SalaryBOImpl();
+    EmployeeBO employeeBO = new EmployeeBOImpl();
 
     public void initialize(){
         try {
@@ -33,10 +39,10 @@ public class SalaryManageFormController {
 
         cmdPosition.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                EmployeeDTO employeeDto = EmployeeModel.searchEmployeePosition(t1.toString());
-                txtEmployeeid.setText(employeeDto.getEmpid());
-                txtName.setText(employeeDto.getName());
-                txtAmount.setText(employeeDto.getBasicSalary());
+                Employee employee = employeeBO.searchEmployeePosition(t1.toString());
+                txtEmployeeid.setText(employee.getEmpid());
+                txtName.setText(employee.getName());
+                txtAmount.setText(employee.getBasicSalary());
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             } catch (ClassNotFoundException e) {
@@ -55,10 +61,9 @@ public class SalaryManageFormController {
         String date = dtpDate.getValue().toString();
 
         var dto = new SalaryDTO(salaryid, employeeid, date, amount);
-        var model = new SalaryModel();
 
         try {
-            boolean isSaved = model.saveSalary(dto);
+            boolean isSaved = salaryBO.saveSalary(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Salary Paid Succesfull").show();
             }
@@ -73,7 +78,7 @@ public class SalaryManageFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<EmployeeDTO> empList = EmployeeModel.loadAllEmployees();
+            List<EmployeeDTO> empList = employeeBO.loadAllEmployee();
 
             for (EmployeeDTO employeeDto  : empList) {
                 obList.add(employeeDto.getPosition());
@@ -96,6 +101,6 @@ public class SalaryManageFormController {
     }
 
     private void autoGenarateId() throws SQLException, ClassNotFoundException {
-        txtSalaryid.setText(new SalaryModel().autoGenarateSalaryId());
+        txtSalaryid.setText(salaryBO.generateSalaryId());
     }
 }

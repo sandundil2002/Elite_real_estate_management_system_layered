@@ -8,10 +8,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.AgentBO;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.model.dto.AgentDTO;
 import lk.ijse.elite.model.dto.PropertyDTO;
-import lk.ijse.elite.model.AgentModel;
-import lk.ijse.elite.model.PropertyModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,7 +34,8 @@ public class PropertymanageFormcCntroller {
 
     @FXML
     private TextField txtPropertyId;
-
+    PropertyBO propertyBO = new PropertyBOImpl();
+    AgentBO agentBO = new AgentBOImpl();
 
     public void initialize(){
         try {
@@ -44,7 +47,7 @@ public class PropertymanageFormcCntroller {
 
         txtAgentid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                txtAgentid.setValue(AgentModel.searchAgent(t1.toString()).getAgent_id());
+                txtAgentid.setValue(agentBO.searchAgent(t1.toString()).getAgent_id());
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -78,10 +81,9 @@ public class PropertymanageFormcCntroller {
         }
 
         var dto = new PropertyDTO(pid, aid, price, address, type, perches, status);
-        var model = new PropertyModel();
 
         try {
-            boolean isUpdated = model.updateProperty(dto);
+            boolean isUpdated = propertyBO.updateProperty(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Property Update Succesfull!!!").show();
                 clearFields();
@@ -95,9 +97,8 @@ public class PropertymanageFormcCntroller {
 
     public void btnSearchOnAction(ActionEvent actionEvent) {
         String pid = txtPropertyId.getText();
-        var model = new PropertyModel();
         try {
-            PropertyDTO dto = model.searchProperty(pid);
+            PropertyDTO dto = propertyBO.searchProperty(pid);
             if (dto != null) {
                 fillFields(dto);
             } else {
@@ -134,10 +135,9 @@ public class PropertymanageFormcCntroller {
         }
 
         var dto = new PropertyDTO(pId, aId, price, address, type, perches, status);
-        var model = new PropertyModel();
 
         try {
-            boolean isSaved = model.saveProperty(dto);
+            boolean isSaved = propertyBO.saveProperty(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Property Added Succesfull").show();
                 clearFields();
@@ -154,7 +154,7 @@ public class PropertymanageFormcCntroller {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<AgentDTO> ageList = AgentModel.loadAllAgents();
+            List<AgentDTO> ageList = agentBO.loadAllAgent();
 
             for (AgentDTO agentDto  : ageList) {
                 obList.add(agentDto.getAgent_id());
@@ -186,6 +186,6 @@ public class PropertymanageFormcCntroller {
     }
 
     private void autoGenerateId() throws SQLException, ClassNotFoundException {
-        txtPropertyId.setText(new PropertyModel().generatePropertyId());
+        txtPropertyId.setText(propertyBO.generatePropertyId());
     }
 }

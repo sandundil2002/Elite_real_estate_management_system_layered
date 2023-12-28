@@ -5,6 +5,7 @@ import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.RentingDAO;
 import lk.ijse.elite.entity.*;
 import lk.ijse.elite.model.dto.RentDTO;
+import lk.ijse.elite.model.dto.RentingDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ import java.util.List;
 public class RentingBOImpl implements RentingBO {
     RentingDAO rentingDAO = (RentingDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.RENTING);
     @Override
-    public List<RentDTO> loadAllRenting() throws SQLException, ClassNotFoundException {
+    public List<RentingDTO> loadAllRenting() throws SQLException, ClassNotFoundException {
         List<Rent> rents = rentingDAO.loadAll();
-        List<RentDTO> rentDTOS = new ArrayList<>();
+        List<RentingDTO> rentDTOS = new ArrayList<>();
 
         for (Rent rent : rents){
-            rentDTOS.add(new RentDTO(rent.getRentId(),rent.getPropertyId(),rent.getCustomerId(),rent.getDate(),rent.getDuration()));
+            rentDTOS.add(new RentingDTO(rent.getRentId(),rent.getPropertyId(),rent.getCustomerId(),rent.getDate(),rent.getDuration()));
         }
         return rentDTOS;
     }
@@ -50,8 +51,9 @@ public class RentingBOImpl implements RentingBO {
         return rentingDAO.generateId();
     }
 
+
     @Override
-    public boolean isUpdated(Rent rentDto, Renting rentingDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
-        return rentingDAO.isUpdated(rentDto,rentingDto,rentDetailDto,paymentDto,paymentdetailDto);
+    public boolean isUpdated(Rent rentingDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
+        return rentingDAO.isUpdated(rentingDto,rentDetailDto,paymentDto,paymentdetailDto);
     }
 }

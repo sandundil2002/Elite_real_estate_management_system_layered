@@ -6,10 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.CustomerBO;
+import lk.ijse.elite.bo.custom.ScheduleBO;
+import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.model.dto.CustomerDTO;
 import lk.ijse.elite.model.dto.ScheduleDTO;
-import lk.ijse.elite.model.CustomerModel;
-import lk.ijse.elite.model.ScheduleModel;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -21,6 +23,8 @@ public class CustomerManageFormController {
     public TextField txtEmail;
     public TextField txtName;
     public JFXComboBox cmbSheduleid;
+    CustomerBO customerBO = new CustomerBOImpl();
+    ScheduleBO scheduleBO = new ScheduleBOImpl();
 
     public void initialize(){
         try {
@@ -45,10 +49,9 @@ public class CustomerManageFormController {
         }
 
         var dto = new CustomerDTO(cid,sheduleid,name, address, mobile, email);
-        var model = new CustomerModel();
 
         try {
-            boolean isSaved = model.saveCustomer(dto);
+            boolean isSaved = customerBO.saveCustomer(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved Succesfull").show();
                 clearFields();
@@ -73,9 +76,8 @@ public class CustomerManageFormController {
 
     public void btnSearchOnAction(ActionEvent actionEvent) {
         String cid = txtCustomerid.getText();
-        var model = new CustomerModel();
         try {
-            CustomerDTO dto = model.searchCustomer(cid);
+            CustomerDTO dto = customerBO.searchCustomer(cid);
 
             if(dto != null) {
                 fillFields(dto);
@@ -101,13 +103,11 @@ public class CustomerManageFormController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String cid = txtCustomerid.getText();
-        var model = new CustomerModel();
 
         try{
-            var customerModel = new CustomerModel();
-            CustomerDTO dto = model.searchCustomer(cid);
+            CustomerDTO dto = customerBO.searchCustomer(cid);
             if(dto != null) {
-                boolean isDeleted = customerModel.deleteCustomer(cid);
+                boolean isDeleted = customerBO.deleteCustomer(cid);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer Delete Succesfull!!!").show();
                     clearFields();
@@ -138,10 +138,9 @@ public class CustomerManageFormController {
         }
 
         var dto = new CustomerDTO(cid,sheduleid,name, address, mobile, email);
-        var model = new CustomerModel();
 
         try {
-            boolean isUpdated = model.updateCustomer(dto);
+            boolean isUpdated = customerBO.updateCustomer(dto);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer Update Succesfull!!!").show();
                 clearFields();
@@ -191,7 +190,7 @@ public class CustomerManageFormController {
     private void loadAllShedule() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<ScheduleDTO> sheList = ScheduleModel.loadAllSchedule();
+            List<ScheduleDTO> sheList = scheduleBO.loadAllSchedule();
 
             for (ScheduleDTO sheduleDto  : sheList) {
                 obList.add(sheduleDto.getScheduleId());
@@ -205,6 +204,6 @@ public class CustomerManageFormController {
     }
 
     private void autoGenerateId() throws ClassNotFoundException, SQLException {
-        txtCustomerid.setText(new CustomerModel().generateCustomerId());
+        txtCustomerid.setText(customerBO.generateCustomerId());
     }
 }

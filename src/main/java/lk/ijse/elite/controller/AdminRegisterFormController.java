@@ -7,8 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
 import lk.ijse.elite.model.dto.AdminDTO;
-import lk.ijse.elite.model.AdminModel;
 import lk.ijse.elite.sendMail.SendEmail;
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class AdminRegisterFormController {
     public TextField txtPassword;
     public AnchorPane signupPane;
     int otp;
+    AdminBO adminBO = new AdminBOImpl();
 
     public void initialize() {
         try {
@@ -49,10 +51,9 @@ public class AdminRegisterFormController {
         }
 
         var dto = new AdminDTO(id, name, otp, mobile, email, password);
-        var model = new AdminModel();
 
         try {
-            boolean isSaved = model.registerAdmin(dto);
+            boolean isSaved = adminBO.saveAdmin(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Admin Register Succesfull").show();
                 clearFields();
@@ -149,6 +150,6 @@ public class AdminRegisterFormController {
     }
 
     public void autoGenerateAdminId() throws SQLException, ClassNotFoundException {
-        txtAdmin_id.setText(new AdminModel().generateAdminId());
+        txtAdmin_id.setText(adminBO.generateAdminId());
     }
 }

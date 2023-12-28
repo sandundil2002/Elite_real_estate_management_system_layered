@@ -33,7 +33,7 @@ public class AdminDAOImpl implements AdminDAO {
         return SQLUtil.sql("INSERT INTO admin VALUES (?,?,?,?,?,?)",
                 dto.getAdmin_id(),
                 dto.getName(),
-                dto.getAddress(),
+                dto.getOtp(),
                 dto.getMobile(),
                 dto.getPassword(),
                 dto.getEmail());

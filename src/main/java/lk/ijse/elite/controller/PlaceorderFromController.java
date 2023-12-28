@@ -4,15 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import lk.ijse.elite.bo.custom.CustomerBO;
+import lk.ijse.elite.bo.custom.PaymentBO;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.SellOrderBO;
+import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
+import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
+import lk.ijse.elite.bo.custom.impl.SellOrderBOImpl;
 import lk.ijse.elite.db.DbConnection;
+import lk.ijse.elite.entity.Payment;
+import lk.ijse.elite.entity.PaymentDetail;
 import lk.ijse.elite.model.dto.CustomerDTO;
-import lk.ijse.elite.model.dto.PaymentDTO;
-import lk.ijse.elite.model.dto.PaymentdetailDTO;
 import lk.ijse.elite.model.dto.PropertyDTO;
-import lk.ijse.elite.model.CustomerModel;
-import lk.ijse.elite.model.PaymentModel;
-import lk.ijse.elite.model.PlaceOrderModel;
-import lk.ijse.elite.model.PropertyModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -30,6 +34,10 @@ public class PlaceorderFromController {
     public DatePicker txtDate;
     public TextField txtPaymentid;
     public ChoiceBox cmdPaymethod;
+    CustomerBO customerBO = new CustomerBOImpl();
+    PaymentBO paymentBO = new PaymentBOImpl();
+    SellOrderBO sellOrderBO = new SellOrderBOImpl();
+    PropertyBO propertyBO = new PropertyBOImpl();
 
     public void initialize(){
         try {
@@ -44,7 +52,7 @@ public class PlaceorderFromController {
 
         comProid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                PropertyDTO propertyDto = PropertyModel.searchProperty(t1.toString());
+                PropertyDTO propertyDto = propertyBO.searchProperty(t1.toString());
                 txtPropertyPrice.setText(propertyDto.getPrice());
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -55,7 +63,7 @@ public class PlaceorderFromController {
 
         comCusid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                CustomerDTO customerDto = CustomerModel.searchCustomer(t1.toString());
+                CustomerDTO customerDto = customerBO.searchCustomer(t1.toString());
                 txtCustomerName.setText(customerDto.getName());
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,11 +85,14 @@ public class PlaceorderFromController {
         String method = String.valueOf(cmdPaymethod.getValue());
         String date = txtDate.getValue().toString();
 
-        var paymentDto = new PaymentDTO(paymentId,customerId,propertyId,date,price,method);
-        var paymentDetailDto = new PaymentdetailDTO(propertyId,paymentId,method);
+
+        Payment payment = new Payment(paymentId,customerId,propertyId,date,price,method);
+        PaymentDetail paymentDetail = new PaymentDetail(propertyId,paymentId,method);
+        //var paymentDto = new PaymentDTO(paymentId,customerId,propertyId,date,price,method);
+        //var paymentDetailDto = new PaymentdetailDTO(propertyId,paymentId,method);
 
         try {
-            boolean isSuccess = PaymentModel.isPaymentSuccess(paymentDto,paymentDetailDto);
+            boolean isSuccess = sellOrderBO.isOrderSuccess(payment,paymentDetail);
             if (isSuccess) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Successfull", ButtonType.OK).show();
                 jasperReport();
@@ -105,7 +116,7 @@ public class PlaceorderFromController {
     private void loadAllProperty() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<PropertyDTO> proList = PropertyModel.loadAllProperty();
+            List<PropertyDTO> proList = propertyBO.loadAllProperty();
 
             for (PropertyDTO propertyDto  : proList) {
                 obList.add(propertyDto.getPropertyId());
@@ -121,7 +132,7 @@ public class PlaceorderFromController {
     private void loadAllCustomer() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<CustomerDTO> cusList = CustomerModel.getAllCustomers();
+            List<CustomerDTO> cusList = customerBO.loadAllCustomer();
 
             for (CustomerDTO customerDto  : cusList) {
                 obList.add(customerDto.getCustomer_id());
@@ -157,6 +168,6 @@ public class PlaceorderFromController {
 
 
     private void autoGenarateId() throws SQLException, ClassNotFoundException {
-        txtPaymentid.setText(new PaymentModel().generatePaymentId());
+        txtPaymentid.setText(paymentBO.generatePaymentId());
     }
 }

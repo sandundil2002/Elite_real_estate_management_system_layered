@@ -7,10 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.custom.MaintainBO;
+import lk.ijse.elite.bo.custom.RentingBO;
+import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
+import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
 import lk.ijse.elite.model.dto.MaintainDTO;
 import lk.ijse.elite.model.dto.RentingDTO;
-import lk.ijse.elite.model.MaintainModel;
-import lk.ijse.elite.model.RentingModel;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class MaintainmanageFormController {
     public TextField txtMaintainId;
     public TextField txtStatus;
     public JFXComboBox cmbRentId;
+    MaintainBO maintainBO = new MaintainBOImpl();
+    RentingBO rentingBO = new RentingBOImpl();
 
     public void initialize(){
         try {
@@ -37,10 +41,9 @@ public class MaintainmanageFormController {
         String status = txtStatus.getText();
 
         var dto = new MaintainDTO(maintainId, rentId, date, status);
-        var model = new MaintainModel();
 
         try {
-            boolean isAdded = model.addMaintain(dto);
+            boolean isAdded = maintainBO.saveMaintain(dto);
             if (isAdded) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Maintenance Added Successfully").show();
                 initialize();
@@ -58,7 +61,7 @@ public class MaintainmanageFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<RentingDTO> rentList = RentingModel.loadAllRentals();
+            List<RentingDTO> rentList = rentingBO.loadAllRenting();
 
             for (RentingDTO rentingDto  : rentList) {
                 obList.add(rentingDto.getRent_id());
@@ -73,6 +76,6 @@ public class MaintainmanageFormController {
     }
 
     private void autoGenerateId() throws SQLException, ClassNotFoundException {
-        txtMaintainId.setText(new MaintainModel().generateMaintainId());
+        txtMaintainId.setText(maintainBO.generateMaintainId());
     }
 }

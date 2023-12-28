@@ -7,7 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.elite.model.AdminModel;
+import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -15,14 +16,15 @@ public class AdminloginFormController {
     public TextField txtPassword;
     public AnchorPane adminPane;
     public TextField txtAdminid;
+    AdminBO adminBO = new AdminBOImpl();
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String adminid = txtAdminid.getText();
         String password = txtPassword.getText();
-        AdminModel adminModel = new AdminModel();
+
         try {
-            boolean isvalidAdminUserId = adminModel.searchAdminUserId(adminid);
-            boolean isvalidAdminPassword = adminModel.searchAdminPassword(password);
+            boolean isvalidAdminUserId = adminBO.searchAdminUserId(adminid);
+            boolean isvalidAdminPassword = adminBO.searchAdminPassword(password);
 
         if(!isvalidAdminUserId) {
             new Alert(Alert.AlertType.ERROR, "Invalid User Id Please Try Again!!!").show();

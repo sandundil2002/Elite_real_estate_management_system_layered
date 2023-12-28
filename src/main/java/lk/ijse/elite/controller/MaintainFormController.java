@@ -7,10 +7,11 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.elite.bo.custom.MaintainBO;
+import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.model.dto.MaintainDTO;
 import lk.ijse.elite.model.dto.tm.MaintainTM;
-import lk.ijse.elite.model.MaintainModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -29,6 +30,7 @@ public class MaintainFormController {
     public TableColumn colStatus;
     public TableColumn colFinished;
     public TableColumn colCansel;
+    MaintainBO maintainBO = new MaintainBOImpl();
 
     public void initialize() {
         cellValueFactory();
@@ -44,12 +46,10 @@ public class MaintainFormController {
         colCansel.setCellValueFactory(new PropertyValueFactory<>("btnCansel"));
     }
     private void loadAllMaintain() {
-        var model = new MaintainModel();
-
         ObservableList<MaintainTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<MaintainDTO> dtoList = model.loadAllMaintenance();
+            List<MaintainDTO> dtoList = maintainBO.loadAllMaintain();
 
             for (MaintainDTO dto : dtoList) {
                 Button Finished = new Button("Complete");
@@ -64,7 +64,7 @@ public class MaintainFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to Completed this Schedule?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isUpdated = model.updateMaintainComplete(dto.getMaintain_id());
+                            boolean isUpdated = maintainBO.updateMaintainComplete(dto.getMaintain_id());
                             if (isUpdated) {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Maintenance Finished", ButtonType.OK).show();
                                 loadAllMaintain();
@@ -84,7 +84,7 @@ public class MaintainFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to Cansel this Schedule?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isUpdated = model.updateMaintainCansel(dto.getMaintain_id());
+                            boolean isUpdated = maintainBO.updateMaintainCansel(dto.getMaintain_id());
                             if (isUpdated) {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Maintenance Cansel", ButtonType.OK).show();
                                 loadAllMaintain();

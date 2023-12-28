@@ -13,15 +13,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.ScheduleBO;
+import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.model.dto.ScheduleDTO;
 import lk.ijse.elite.model.dto.tm.SheduleTM;
-import lk.ijse.elite.model.ScheduleModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
 
 public class ShedulemanageFormController {
     public AnchorPane shedule;
@@ -43,6 +43,7 @@ public class ShedulemanageFormController {
 
     @FXML
     private TableView<SheduleTM> tblShedule;
+    ScheduleBO scheduleBO = new ScheduleBOImpl();
 
     public void initialize(){
         setCellValueFactory();
@@ -78,12 +79,10 @@ public class ShedulemanageFormController {
     }
 
     private void loadAllShedules() throws SQLException {
-        var model = new ScheduleModel();
-
         ObservableList<SheduleTM> obList = FXCollections.observableArrayList();
 
         try{
-            List<ScheduleDTO> dtoList = model.loadAllShedules();
+            List<ScheduleDTO> dtoList = scheduleBO.loadAllSchedule();
 
             for(ScheduleDTO dto : dtoList){
                 Button Completed = new Button("Complete");
@@ -98,7 +97,7 @@ public class ShedulemanageFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to Completed this Schedule?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isUpdated = model.updateSheduleCompleted(dto.getScheduleId());
+                            boolean isUpdated = scheduleBO.updateScheduleCompleted(dto.getScheduleId());
                             if(isUpdated) {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Update Succesfull!!!").show();
                                 initialize();
@@ -118,7 +117,7 @@ public class ShedulemanageFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to Cansel this Schedule?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isUpdated = model.updateSheduleCansel(dto.getScheduleId());
+                            boolean isUpdated = scheduleBO.updateScheduleCansel(dto.getScheduleId());
                             if (isUpdated) {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Update Succesfull!!!").show();
                                 initialize();

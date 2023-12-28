@@ -10,10 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.EmployeeBO;
+import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.model.dto.EmployeeDTO;
 import lk.ijse.elite.model.dto.tm.EmployeeTM;
-import lk.ijse.elite.model.EmployeeModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -37,6 +38,7 @@ public class EmployeeFormController {
     public TableColumn colSalary;
     @FXML
     private TableView<EmployeeTM> tblEmployee;
+    EmployeeBO employeeBO = new EmployeeBOImpl();
 
     public void initialize() {
         cellValueFactory();
@@ -68,12 +70,10 @@ public class EmployeeFormController {
     }
 
     private void loadAllEmployees(){
-        var model = new EmployeeModel();
-
         ObservableList<EmployeeTM> obList = FXCollections.observableArrayList();
 
         try{
-            List<EmployeeDTO> dtoList = model.loadAllEmployees();
+            List<EmployeeDTO> dtoList = employeeBO.loadAllEmployee();
 
             for(EmployeeDTO dto : dtoList){
                 Button Pay_Salary = new Button("Pay_Salary");

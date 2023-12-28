@@ -3,6 +3,8 @@ package lk.ijse.elite.dao.custom.impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.dao.custom.RentingDAO;
 import lk.ijse.elite.entity.*;
 import lk.ijse.elite.util.SQLUtil;
@@ -12,9 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static lk.ijse.elite.model.PropertyModel.updatePropertyStatus;
-
 public class RentingDAOImpl implements RentingDAO {
+    PropertyBO propertyBO = new PropertyBOImpl();
     @Override
     public List<Rent> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM renting");
@@ -72,7 +73,7 @@ public class RentingDAOImpl implements RentingDAO {
     }
 
     @Override
-    public boolean isUpdated(Rent rentDto , Renting rentingDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
+    public boolean isUpdated(Rent rentDto , RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
         try {
             TransactionUtil.startTransaction();
             boolean isPaymentSaved = new PaymentDAOImpl().save(paymentDto);
@@ -83,7 +84,7 @@ public class RentingDAOImpl implements RentingDAO {
                     if(isRentSaved){
                         boolean isRentDetailSaved = new RentingDetailDAOImpl().save(rentDetailDto);
                         if(isRentDetailSaved){
-                            boolean isPropertyUpdated = updatePropertyStatus(rentDto.getPropertyId());
+                            boolean isPropertyUpdated = propertyBO.updatePropertyStatus(rentDto.getPropertyId());
                             if(isPropertyUpdated){
                                 return true;
                             }

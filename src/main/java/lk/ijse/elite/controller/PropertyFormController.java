@@ -12,10 +12,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.model.dto.PropertyDTO;
 import lk.ijse.elite.model.dto.tm.PropertyTM;
-import lk.ijse.elite.model.PropertyModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -39,6 +40,7 @@ public class PropertyFormController {
     public TableColumn colStatus;
     public TableColumn colRemove;
     public TableColumn colPerches;
+    PropertyBO propertyBO = new PropertyBOImpl();
 
     public void initialize() {
         setCellValueFactory();
@@ -83,12 +85,10 @@ public class PropertyFormController {
         }
     }
     private void loadAllProperty() {
-        var model = new PropertyModel();
-
         ObservableList<PropertyTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<PropertyDTO> dtoList = model.loadAllProperty();
+            List<PropertyDTO> dtoList = propertyBO.loadAllProperty();
 
             for(PropertyDTO dto : dtoList) {
                 Button Remove = new Button("Remove");
@@ -101,7 +101,7 @@ public class PropertyFormController {
                     Optional<ButtonType> result = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to remove this Property?", ok, no).showAndWait();
                     if (result.orElse(no) == ok) {
                         try {
-                            boolean isDeleted = model.deleteProperty(dto.getPropertyId());
+                            boolean isDeleted = propertyBO.deleteProperty(dto.getPropertyId());
                             if (isDeleted) {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted Successfully !", ButtonType.OK).show();
                                 initialize();

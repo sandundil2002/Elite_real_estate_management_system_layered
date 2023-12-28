@@ -12,10 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.ScheduleBO;
+import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
+import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.model.dto.AdminDTO;
 import lk.ijse.elite.model.dto.ScheduleDTO;
-import lk.ijse.elite.model.AdminModel;
-import lk.ijse.elite.model.ScheduleModel;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +30,8 @@ public class SheduleFormController {
     public DatePicker txtDate;
     public ComboBox cmbAdminId;
     public TextField txtStatus;
-
+    ScheduleBO scheduleBO = new ScheduleBOImpl();
+    AdminBO adminBO = new AdminBOImpl();
 
     public void initialize(){
         try {
@@ -40,7 +43,7 @@ public class SheduleFormController {
 
         cmbAdminId.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                AdminModel.searchAdmin(t1.toString());
+                adminBO.searchAdmin(t1.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -62,10 +65,9 @@ public class SheduleFormController {
         }
 
         var dto = new ScheduleDTO(shedule_id, admin_id, date, time, status);
-        var model = new ScheduleModel();
 
         try {
-            boolean isSaved = model.saveShedule(dto);
+            boolean isSaved = scheduleBO.saveSchedule(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Added Succesfull").show();
             }
@@ -90,10 +92,9 @@ public class SheduleFormController {
         }
 
         var dto = new ScheduleDTO(shedule_id, admin_id, date, time, status);
-        var model = new ScheduleModel();
 
         try {
-            boolean isUpdated = model.updateShedule(dto);
+            boolean isUpdated = scheduleBO.updateSchedule(dto);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Update Succesfull!!!").show();
             }
@@ -106,13 +107,11 @@ public class SheduleFormController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String shedule_id = txtSheduleId.getText();
-        var model = new ScheduleModel();
 
         try{
-            var scheduleModel = new ScheduleModel();
-            ScheduleDTO dto = model.searchShedule(shedule_id);
+            ScheduleDTO dto = scheduleBO.searchSchedule(shedule_id);
             if(dto != null) {
-                boolean isDeleted = model.deleteShedule(shedule_id);
+                boolean isDeleted = scheduleBO.deleteSchedule(shedule_id);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Schedule Delete Succesfull!!!").show();
                 }
@@ -138,7 +137,7 @@ public class SheduleFormController {
     private void loadAllAdmins() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<AdminDTO> adminList = AdminModel.loadAllAdmin();
+            List<AdminDTO> adminList = adminBO.loadAllAdmin();
 
             for (AdminDTO adminDto  : adminList) {
                 obList.add(adminDto.getAdmin_id());
@@ -165,6 +164,6 @@ public class SheduleFormController {
     }
 
     public void autoGenerateId() throws SQLException, ClassNotFoundException {
-        txtSheduleId.setText(new ScheduleModel().generateSheduleId());
+        txtSheduleId.setText(scheduleBO.generateScheduleId());
     }
 }

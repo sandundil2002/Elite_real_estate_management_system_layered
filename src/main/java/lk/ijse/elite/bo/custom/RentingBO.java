@@ -3,13 +3,14 @@ package lk.ijse.elite.bo.custom;
 import lk.ijse.elite.bo.SuperBO;
 import lk.ijse.elite.entity.*;
 import lk.ijse.elite.model.dto.RentDTO;
+import lk.ijse.elite.model.dto.RentingDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface RentingBO extends SuperBO {
 
-    List<RentDTO> loadAllRenting() throws SQLException,ClassNotFoundException;
+    List<RentingDTO> loadAllRenting() throws SQLException,ClassNotFoundException;
 
     boolean saveRenting(RentDTO dto) throws SQLException,ClassNotFoundException;
 
@@ -21,5 +22,5 @@ public interface RentingBO extends SuperBO {
 
     String generateRentingId() throws SQLException,ClassNotFoundException;
 
-    boolean isUpdated(Rent rentDto , Renting rentingDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException;
+    boolean isUpdated(Rent rentDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException;
 }

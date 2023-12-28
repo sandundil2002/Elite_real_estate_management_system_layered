@@ -7,14 +7,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.elite.bo.custom.PaymentBO;
+import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.elite.model.dto.PaymentDTO;
 import lk.ijse.elite.model.dto.tm.PaymentTM;
-import lk.ijse.elite.model.PaymentModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class PaymentsFormController {
-
     public TableColumn colPaymentId;
     public TableColumn colPropertyId;
     public TableColumn colCustomerId;
@@ -23,6 +23,7 @@ public class PaymentsFormController {
     public TableColumn colMethod;
     @FXML
     private TableView<PaymentTM> tblPayment;
+    PaymentBO paymentBO = new PaymentBOImpl();
 
     public void initialize() {
         cellValueFactory();
@@ -39,11 +40,10 @@ public class PaymentsFormController {
     }
 
     private void loadAllPayments() {
-        var model = new PaymentModel();
         ObservableList<PaymentTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<PaymentDTO> dtoList = model.getAllPayments();
+            List<PaymentDTO> dtoList = paymentBO.loadAllPayment();
 
             for (PaymentDTO dto : dtoList) {
                 obList.add(new PaymentTM(

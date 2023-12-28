@@ -1,6 +1,8 @@
 package lk.ijse.elite.dao.custom.impl;
 
 import javafx.scene.control.Alert;
+import lk.ijse.elite.bo.custom.PropertyBO;
+import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.dao.custom.PaymentDAO;
 import lk.ijse.elite.entity.Payment;
 import lk.ijse.elite.entity.PaymentDetail;
@@ -11,9 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import static lk.ijse.elite.model.PropertyModel.updatePropertyStatus;
 
 public class PaymentDAOImpl implements PaymentDAO {
+    PropertyBO propertyBO = new PropertyBOImpl();
     @Override
     public List<Payment> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM payment");
@@ -79,7 +81,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             if(isPaymentSaved){
                 boolean isPaymentDetailSaved = new PaymentDetailDAOImpl().save(paymentdetailDto);
                 if (isPaymentDetailSaved){
-                    boolean isPropertyUpdated = updatePropertyStatus(paymentdetailDto.getProperty_id());
+                    boolean isPropertyUpdated = propertyBO.updatePropertyStatus(paymentdetailDto.getProperty_id());
                     if (isPropertyUpdated){
                         return true;
                     }
