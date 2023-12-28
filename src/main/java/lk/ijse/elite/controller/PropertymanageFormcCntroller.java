@@ -12,8 +12,8 @@ import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.bo.custom.PropertyBO;
 import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
-import lk.ijse.elite.model.dto.AgentDTO;
-import lk.ijse.elite.model.dto.PropertyDTO;
+import lk.ijse.elite.dto.AgentDTO;
+import lk.ijse.elite.dto.PropertyDTO;
 
 import java.sql.SQLException;
 import java.util.List;

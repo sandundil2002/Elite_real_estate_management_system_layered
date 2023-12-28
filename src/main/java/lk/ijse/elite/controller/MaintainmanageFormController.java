@@ -11,8 +11,8 @@ import lk.ijse.elite.bo.custom.MaintainBO;
 import lk.ijse.elite.bo.custom.RentingBO;
 import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
 import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
-import lk.ijse.elite.model.dto.MaintainDTO;
-import lk.ijse.elite.model.dto.RentingDTO;
+import lk.ijse.elite.dto.MaintainDTO;
+import lk.ijse.elite.dto.RentingDTO;
 import java.sql.SQLException;
 import java.util.List;
 

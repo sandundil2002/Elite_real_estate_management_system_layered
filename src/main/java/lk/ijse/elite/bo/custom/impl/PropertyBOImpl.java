@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.PropertyBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.PropertyDAO;
 import lk.ijse.elite.entity.Property;
-import lk.ijse.elite.model.dto.PropertyDTO;
+import lk.ijse.elite.dto.PropertyDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

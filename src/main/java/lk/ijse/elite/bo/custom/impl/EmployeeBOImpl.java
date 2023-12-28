@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.EmployeeBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.EmployeeDAO;
 import lk.ijse.elite.entity.Employee;
-import lk.ijse.elite.model.dto.EmployeeDTO;
+import lk.ijse.elite.dto.EmployeeDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

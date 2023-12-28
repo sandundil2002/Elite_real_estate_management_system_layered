@@ -16,8 +16,12 @@ import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
-import lk.ijse.elite.entity.*;
-import lk.ijse.elite.model.dto.*;
+import lk.ijse.elite.dto.CustomerDTO;
+import lk.ijse.elite.dto.PropertyDTO;
+import lk.ijse.elite.entity.Payment;
+import lk.ijse.elite.entity.PaymentDetail;
+import lk.ijse.elite.entity.Rent;
+import lk.ijse.elite.entity.RentingDetail;
 
 import java.sql.SQLException;
 import java.util.List;

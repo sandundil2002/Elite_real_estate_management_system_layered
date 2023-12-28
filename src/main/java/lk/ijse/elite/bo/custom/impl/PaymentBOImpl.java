@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.PaymentBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.PaymentDAO;
 import lk.ijse.elite.entity.Payment;
-import lk.ijse.elite.model.dto.PaymentDTO;
+import lk.ijse.elite.dto.PaymentDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

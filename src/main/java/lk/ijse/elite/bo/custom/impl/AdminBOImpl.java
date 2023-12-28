@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.AdminDAO;
 import lk.ijse.elite.entity.Admin;
-import lk.ijse.elite.model.dto.AdminDTO;
+import lk.ijse.elite.dto.AdminDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

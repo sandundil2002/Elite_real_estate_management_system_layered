@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.MaintainBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.MaintainDAO;
 import lk.ijse.elite.entity.Maintain;
-import lk.ijse.elite.model.dto.MaintainDTO;
+import lk.ijse.elite.dto.MaintainDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

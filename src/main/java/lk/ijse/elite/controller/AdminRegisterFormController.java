@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
-import lk.ijse.elite.model.dto.AdminDTO;
+import lk.ijse.elite.dto.AdminDTO;
 import lk.ijse.elite.sendMail.SendEmail;
 import javax.mail.MessagingException;
 import java.io.IOException;

@@ -9,8 +9,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.elite.bo.custom.PaymentBO;
 import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
-import lk.ijse.elite.model.dto.PaymentDTO;
-import lk.ijse.elite.model.dto.tm.PaymentTM;
+import lk.ijse.elite.dto.PaymentDTO;
+import lk.ijse.elite.dto.tm.PaymentTM;
 import java.sql.SQLException;
 import java.util.List;
 

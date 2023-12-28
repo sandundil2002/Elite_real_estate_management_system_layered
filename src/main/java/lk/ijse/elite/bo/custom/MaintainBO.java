@@ -1,7 +1,7 @@
 package lk.ijse.elite.bo.custom;
 
 import lk.ijse.elite.bo.SuperBO;
-import lk.ijse.elite.model.dto.MaintainDTO;
+import lk.ijse.elite.dto.MaintainDTO;
 
 import java.sql.SQLException;
 import java.util.List;

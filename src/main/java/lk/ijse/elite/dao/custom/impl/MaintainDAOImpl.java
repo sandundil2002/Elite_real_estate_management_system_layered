@@ -2,7 +2,6 @@ package lk.ijse.elite.dao.custom.impl;
 
 import lk.ijse.elite.dao.custom.MaintainDAO;
 import lk.ijse.elite.entity.Maintain;
-import lk.ijse.elite.model.dto.MaintainDTO;
 import lk.ijse.elite.util.SQLUtil;
 
 import java.sql.ResultSet;

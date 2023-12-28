@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.DashboardDAO;
 import lk.ijse.elite.entity.Today;
-import lk.ijse.elite.model.dto.TodayAppoinmentsDTO;
+import lk.ijse.elite.dto.TodayAppoinmentsDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package lk.ijse.elite.bo.custom;
 
 import lk.ijse.elite.bo.SuperBO;
-import lk.ijse.elite.model.dto.TodayAppoinmentsDTO;
+import lk.ijse.elite.dto.TodayAppoinmentsDTO;
 
 import java.sql.SQLException;
 import java.util.List;

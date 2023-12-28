@@ -12,8 +12,8 @@ import lk.ijse.elite.bo.custom.SalaryBO;
 import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.bo.custom.impl.SalaryBOImpl;
 import lk.ijse.elite.entity.Employee;
-import lk.ijse.elite.model.dto.EmployeeDTO;
-import lk.ijse.elite.model.dto.SalaryDTO;
+import lk.ijse.elite.dto.EmployeeDTO;
+import lk.ijse.elite.dto.SalaryDTO;
 
 import java.sql.SQLException;
 import java.util.List;

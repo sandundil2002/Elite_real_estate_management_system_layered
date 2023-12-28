@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.ScheduleBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.ScheduleDAO;
 import lk.ijse.elite.entity.Schedule;
-import lk.ijse.elite.model.dto.ScheduleDTO;
+import lk.ijse.elite.dto.ScheduleDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.AgentDAO;
 import lk.ijse.elite.entity.Agent;
-import lk.ijse.elite.model.dto.AgentDTO;
+import lk.ijse.elite.dto.AgentDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

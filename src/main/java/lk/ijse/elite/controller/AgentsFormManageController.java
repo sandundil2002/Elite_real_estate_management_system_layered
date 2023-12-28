@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
-import lk.ijse.elite.model.dto.AgentDTO;
+import lk.ijse.elite.dto.AgentDTO;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 

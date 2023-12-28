@@ -2,8 +2,8 @@ package lk.ijse.elite.bo.custom;
 
 import lk.ijse.elite.bo.SuperBO;
 import lk.ijse.elite.entity.*;
-import lk.ijse.elite.model.dto.RentDTO;
-import lk.ijse.elite.model.dto.RentingDTO;
+import lk.ijse.elite.dto.RentDTO;
+import lk.ijse.elite.dto.RentingDTO;
 
 import java.sql.SQLException;
 import java.util.List;

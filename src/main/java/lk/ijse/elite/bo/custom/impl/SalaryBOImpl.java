@@ -4,7 +4,7 @@ import lk.ijse.elite.bo.custom.SalaryBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.SalaryDAO;
 import lk.ijse.elite.entity.Salary;
-import lk.ijse.elite.model.dto.SalaryDTO;
+import lk.ijse.elite.dto.SalaryDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
