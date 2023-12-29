@@ -8,22 +8,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import lk.ijse.elite.bo.custom.CustomerBO;
-import lk.ijse.elite.bo.custom.PaymentBO;
-import lk.ijse.elite.bo.custom.PropertyBO;
-import lk.ijse.elite.bo.custom.RentingBO;
-import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
-import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
-import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
-import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
+import lk.ijse.elite.bo.custom.*;
+import lk.ijse.elite.bo.custom.impl.*;
+import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.dto.CustomerDTO;
 import lk.ijse.elite.dto.PropertyDTO;
 import lk.ijse.elite.entity.Payment;
 import lk.ijse.elite.entity.PaymentDetail;
 import lk.ijse.elite.entity.Rent;
 import lk.ijse.elite.entity.RentingDetail;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public class RentPropertyFormController {
@@ -40,6 +41,7 @@ public class RentPropertyFormController {
     CustomerBO customerBO = new CustomerBOImpl();
     PaymentBO paymentBO = new PaymentBOImpl();
     PropertyBO propertyBO = new PropertyBOImpl();
+
 
     public void initialize(){
         loadAllProperty();
@@ -101,7 +103,7 @@ public class RentPropertyFormController {
         try {
             boolean isSuccess = rentingBO.isUpdated(rent,rentingDetail,payment,paymentDetail);
             if (isSuccess){
-                new Alert(Alert.AlertType.CONFIRMATION,"Rent Succesfull").show();
+                jasperReport();
                 btnRentClearOnAction();
                 autoGenarateRentId();
             }
@@ -145,6 +147,26 @@ public class RentPropertyFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void jasperReport(){
+        HashMap buyProperty = new HashMap<>();
+        buyProperty.put("Payment_id",txtpayId.getText());
+
+        InputStream resourceAsStream = getClass().getResourceAsStream("/reports/buyProperty.jrxml");
+        try {
+            JasperDesign load = JRXmlLoader.load(resourceAsStream);
+            JasperReport compileReport = JasperCompileManager.compileReport(load);
+            JasperPrint jasperPrint =
+                    JasperFillManager.fillReport(
+                            compileReport,
+                            buyProperty,
+                            DbConnection.getInstance().getConnection()
+                    );
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException | SQLException e) {
+            e.printStackTrace();
         }
     }
 

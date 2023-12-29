@@ -88,13 +88,10 @@ public class PlaceorderFromController {
 
         Payment payment = new Payment(paymentId,customerId,propertyId,date,price,method);
         PaymentDetail paymentDetail = new PaymentDetail(propertyId,paymentId,method);
-        //var paymentDto = new PaymentDTO(paymentId,customerId,propertyId,date,price,method);
-        //var paymentDetailDto = new PaymentdetailDTO(propertyId,paymentId,method);
 
         try {
             boolean isSuccess = sellOrderBO.isOrderSuccess(payment,paymentDetail);
             if (isSuccess) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment Successfull", ButtonType.OK).show();
                 jasperReport();
                 btnClearOnAction();
                 autoGenarateId();
