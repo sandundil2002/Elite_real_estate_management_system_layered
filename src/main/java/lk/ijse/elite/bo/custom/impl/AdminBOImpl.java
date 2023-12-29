@@ -57,6 +57,6 @@ public class AdminBOImpl implements AdminBO {
 
     @Override
     public boolean searchAdminUserId(String id) throws SQLException, ClassNotFoundException {
-        return adminDAO.searchAdminPassword(id);
+        return adminDAO.searchAdminUserId(id);
     }
 }
