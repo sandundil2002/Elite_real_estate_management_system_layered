@@ -28,6 +28,7 @@ public class AdminRegisterFormController {
     public AnchorPane signupPane;
     int otp;
     AdminBO adminBO = new AdminBOImpl();
+    DashboardFormController dashboardBO = new DashboardFormController();
 
     public void initialize() {
         try {
@@ -56,13 +57,10 @@ public class AdminRegisterFormController {
             boolean isSaved = adminBO.saveAdmin(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Admin Register Succesfull").show();
-                clearFields();
-                initialize();
+                btnLoginOnAction(actionEvent);
             }
-        } catch (SQLException e) {
+        } catch (SQLException |ClassNotFoundException | RuntimeException |IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -103,6 +101,7 @@ public class AdminRegisterFormController {
         stage.setScene(scene);
         stage.setTitle("Admin Login Form");
         stage.centerOnScreen();
+        dashboardBO.Animation(anchorPane);
     }
 
     private boolean validateAdmin() {

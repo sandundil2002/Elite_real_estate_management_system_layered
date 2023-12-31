@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 import java.io.IOException;
 
 public class DashboardFormController {
     @FXML
     private Pane bodyPane;
     public AnchorPane dashboard;
+    private AnchorPane anchorPane;
 
     public void initialize() throws IOException {
         btnDashboardOnAction(new ActionEvent());
@@ -23,6 +26,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PropertyForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -33,6 +37,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/EmployeeForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -45,6 +50,7 @@ public class DashboardFormController {
         stage.setScene(scene);
         stage.setTitle("Login Form");
         stage.centerOnScreen();
+        Animation(anchorPane);
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -52,6 +58,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/mainDashboardForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -62,6 +69,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/shedule_form.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -72,6 +80,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/customerForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -82,6 +91,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PaymentsForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -92,6 +102,7 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/RentalForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -102,8 +113,16 @@ public class DashboardFormController {
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/AgentForm.fxml"));
             bodyPane.getChildren().add(anchorPane);
+            Animation(anchorPane);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void Animation(AnchorPane anchorPane){
+        TranslateTransition transition = new TranslateTransition(Duration.millis(350), anchorPane);
+        transition.setFromX(-anchorPane.getPrefWidth());
+        transition.setToX(0);
+        transition.play();
     }
 }

@@ -8,7 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
+import lk.ijse.elite.bo.custom.impl.DashboardBOImpl;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,6 +20,7 @@ public class AdminloginFormController {
     public AnchorPane adminPane;
     public TextField txtAdminid;
     AdminBO adminBO = new AdminBOImpl();
+    DashboardFormController dashboardBO = new DashboardFormController();
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String adminid = txtAdminid.getText();
@@ -39,6 +43,7 @@ public class AdminloginFormController {
             stage.setScene(scene);
             stage.setTitle("Dashboard Form");
             stage.centerOnScreen();
+            dashboardBO.Animation(anchorPane);
         }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,6 +59,7 @@ public class AdminloginFormController {
         stage.setScene(scene);
         stage.setTitle("Admin Register Form");
         stage.centerOnScreen();
+        dashboardBO.Animation(anchorPane);
     }
 }
 
