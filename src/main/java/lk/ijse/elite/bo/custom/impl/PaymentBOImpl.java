@@ -18,25 +18,48 @@ public class PaymentBOImpl implements PaymentBO {
         List<PaymentDTO> paymentDTOS = new ArrayList<>();
 
         for (Payment payment : payments){
-            paymentDTOS.add(new PaymentDTO(payment.getPayment_id(),payment.getCustomer_id(),payment.getProperty_id(),payment.getDate(),payment.getMethod(),payment.getPrice()));
+            paymentDTOS.add(new PaymentDTO(
+                    payment.getPayment_id(),
+                    payment.getCustomer_id(),
+                    payment.getProperty_id(),
+                    payment.getDate(),
+                    payment.getMethod(),
+                    payment.getPrice()));
         }
         return paymentDTOS;
     }
 
     @Override
     public boolean savePayment(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.save(new Payment(dto.getPayment_id(),dto.getCustomer_id(),dto.getProperty_id(),dto.getDate(),dto.getMethod(),dto.getPrice()));
+        return paymentDAO.save(new Payment(
+                dto.getPayment_id(),
+                dto.getCustomer_id(),
+                dto.getProperty_id(),
+                dto.getDate(),
+                dto.getMethod(),
+                dto.getPrice()));
     }
     @Override
     public boolean updatePayment(PaymentDTO dto) throws SQLException, ClassNotFoundException {
-        return paymentDAO.update(new Payment(dto.getPayment_id(),dto.getCustomer_id(),dto.getProperty_id(),dto.getDate(),dto.getMethod(),dto.getPrice()));
+        return paymentDAO.update(new Payment(
+                dto.getPayment_id(),
+                dto.getCustomer_id(),
+                dto.getProperty_id(),
+                dto.getDate(),
+                dto.getMethod(),
+                dto.getPrice()));
     }
 
     @Override
     public PaymentDTO searchPayment(String id) throws SQLException, ClassNotFoundException {
         Payment payment = paymentDAO.search(id);
-        PaymentDTO paymentDTO = new PaymentDTO(payment.getPayment_id(),payment.getCustomer_id(),payment.getProperty_id(),payment.getDate(),payment.getMethod(),payment.getMethod());
-        return paymentDTO;
+        return new PaymentDTO(
+                payment.getPayment_id(),
+                payment.getCustomer_id(),
+                payment.getProperty_id(),
+                payment.getDate(),
+                payment.getMethod(),
+                payment.getMethod());
     }
 
     @Override

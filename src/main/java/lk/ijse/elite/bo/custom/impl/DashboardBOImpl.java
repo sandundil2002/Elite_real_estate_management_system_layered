@@ -28,7 +28,11 @@ public class DashboardBOImpl implements DashboardBO {
         List<TodayAppoinmentsDTO> todayAppoinmentsDTOS = new ArrayList<>();
 
         for (Today today : todays){
-            todayAppoinmentsDTOS.add(new TodayAppoinmentsDTO(today.getShedule_id(),today.getName(),today.getMobile(),today.getTime()));
+            todayAppoinmentsDTOS.add(new TodayAppoinmentsDTO(
+                    today.getShedule_id(),
+                    today.getName(),
+                    today.getMobile(),
+                    today.getTime()));
         }
         return todayAppoinmentsDTOS;
     }

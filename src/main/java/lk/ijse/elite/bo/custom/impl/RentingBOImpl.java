@@ -19,26 +19,45 @@ public class RentingBOImpl implements RentingBO {
         List<RentingDTO> rentDTOS = new ArrayList<>();
 
         for (Rent rent : rents){
-            rentDTOS.add(new RentingDTO(rent.getRentId(),rent.getPropertyId(),rent.getCustomerId(),rent.getDate(),rent.getDuration()));
+            rentDTOS.add(new RentingDTO(
+                    rent.getRentId(),
+                    rent.getPropertyId(),
+                    rent.getCustomerId(),
+                    rent.getDate(),
+                    rent.getDuration()));
         }
         return rentDTOS;
     }
 
     @Override
     public boolean saveRenting(RentDTO dto) throws SQLException, ClassNotFoundException {
-        return rentingDAO.save(new Rent(dto.getRentId(),dto.getPropertyId(),dto.getCustomerId(),dto.getDate(),dto.getDuration()));
+        return rentingDAO.save(new Rent(
+                dto.getRentId(),
+                dto.getPropertyId(),
+                dto.getCustomerId(),
+                dto.getDate(),
+                dto.getDuration()));
     }
 
     @Override
     public boolean updateRenting(RentDTO dto) throws SQLException, ClassNotFoundException {
-        return rentingDAO.update(new Rent(dto.getRentId(),dto.getPropertyId(),dto.getCustomerId(),dto.getDate(),dto.getDuration()));
+        return rentingDAO.update(new Rent(
+                dto.getRentId(),
+                dto.getPropertyId(),
+                dto.getCustomerId(),
+                dto.getDate(),
+                dto.getDuration()));
     }
 
     @Override
     public RentDTO searchRenting(String id) throws SQLException, ClassNotFoundException {
         Rent rent = rentingDAO.search(id);
-        RentDTO rentDTO = new RentDTO(rent.getRentId(),rent.getPropertyId(),rent.getCustomerId(),rent.getDate(),rent.getDuration());
-        return rentDTO;
+        return new RentDTO(
+                rent.getRentId(),
+                rent.getPropertyId(),
+                rent.getCustomerId(),
+                rent.getDate(),
+                rent.getDuration());
     }
 
     @Override

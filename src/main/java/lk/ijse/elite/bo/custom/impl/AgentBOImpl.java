@@ -17,26 +17,45 @@ public class AgentBOImpl implements AgentBO {
         List<Agent> agents = agentDAO.loadAll();
         List<AgentDTO> agentDTOS = new ArrayList<>();
         for (Agent agent : agents){
-            agentDTOS.add(new AgentDTO(agent.getAgent_id(),agent.getName(),agent.getAddress(),agent.getMobile(),agent.getEmail()));
+            agentDTOS.add(new AgentDTO(
+                    agent.getAgent_id(),
+                    agent.getName(),
+                    agent.getAddress(),
+                    agent.getMobile(),
+                    agent.getEmail()));
         }
         return agentDTOS;
     }
 
     @Override
     public boolean saveAgent(AgentDTO dto) throws SQLException, ClassNotFoundException {
-        return agentDAO.save(new Agent(dto.getAgent_id(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getEmail()));
+        return agentDAO.save(new Agent(
+                dto.getAgent_id(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getEmail()));
     }
 
     @Override
     public boolean updateAgent(AgentDTO dto) throws SQLException, ClassNotFoundException {
-        return agentDAO.update(new Agent(dto.getAgent_id(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getEmail()));
+        return agentDAO.update(new Agent(
+                dto.getAgent_id(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getEmail()));
     }
 
     @Override
     public AgentDTO searchAgent(String id) throws SQLException, ClassNotFoundException {
         Agent agent = agentDAO.search(id);
-        AgentDTO agentDTO = new AgentDTO(agent.getAgent_id(),agent.getName(),agent.getAddress(),agent.getMobile(),agent.getEmail());
-        return agentDTO;
+        return new AgentDTO(
+                agent.getAgent_id(),
+                agent.getName(),
+                agent.getAddress(),
+                agent.getMobile(),
+                agent.getEmail());
     }
 
     @Override

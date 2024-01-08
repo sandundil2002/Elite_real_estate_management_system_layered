@@ -18,26 +18,49 @@ public class AdminBOImpl implements AdminBO {
         List<AdminDTO> adminDTOS = new ArrayList<>();
 
         for (Admin admin : admins){
-            adminDTOS.add(new AdminDTO(admin.getAdmin_id(),admin.getName(),admin.getOtp(),admin.getMobile(),admin.getPassword(),admin.getEmail()));
+            adminDTOS.add(new AdminDTO(
+                    admin.getAdmin_id(),
+                    admin.getName(),
+                    admin.getOtp(),
+                    admin.getMobile(),
+                    admin.getPassword(),
+                    admin.getEmail()));
         }
         return adminDTOS;
     }
 
     @Override
     public boolean saveAdmin(AdminDTO dto) throws SQLException, ClassNotFoundException {
-        return adminDAO.save(new Admin(dto.getAdmin_id(),dto.getName(),dto.getOtp(),dto.getMobile(),dto.getPassword(),dto.getEmail()));
+        return adminDAO.save(new Admin(
+                dto.getAdmin_id(),
+                dto.getName(),
+                dto.getOtp(),
+                dto.getMobile(),
+                dto.getPassword(),
+                dto.getEmail()));
     }
 
     @Override
     public boolean updateAdmin(AdminDTO dto) throws SQLException, ClassNotFoundException {
-        return adminDAO.update(new Admin(dto.getAdmin_id(),dto.getName(),dto.getOtp(),dto.getMobile(),dto.getPassword(),dto.getEmail()));
+        return adminDAO.update(new Admin(
+                dto.getAdmin_id(),
+                dto.getName(),
+                dto.getOtp(),
+                dto.getMobile(),
+                dto.getPassword(),
+                dto.getEmail()));
     }
 
     @Override
     public AdminDTO searchAdmin(String id) throws SQLException, ClassNotFoundException {
         Admin admin = adminDAO.search(id);
-        AdminDTO adminDTO = new AdminDTO(admin.getAdmin_id(),admin.getName(),admin.getOtp(),admin.getMobile(),admin.getPassword(),admin.getPassword());
-        return adminDTO;
+        return new AdminDTO(
+                admin.getAdmin_id(),
+                admin.getName(),
+                admin.getOtp(),
+                admin.getMobile(),
+                admin.getPassword(),
+                admin.getPassword());
     }
 
     @Override

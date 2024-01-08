@@ -17,26 +17,53 @@ public class EmployeeBOImpl implements EmployeeBO {
         List<Employee> employees = employeeDAO.loadAll();
         List<EmployeeDTO> employeeDTOS = new ArrayList<>();
         for (Employee employee : employees){
-            employeeDTOS.add(new EmployeeDTO(employee.getEmpid(),employee.getAdid(),employee.getName(),employee.getAddress(),employee.getMobile(),employee.getPosition(),employee.getBasicSalary()));
+            employeeDTOS.add(new EmployeeDTO(
+                    employee.getEmpid(),
+                    employee.getAdid(),
+                    employee.getName(),
+                    employee.getAddress(),
+                    employee.getMobile(),
+                    employee.getPosition(),
+                    employee.getBasicSalary()));
         }
         return employeeDTOS;
     }
 
     @Override
     public boolean saveEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException {
-        return employeeDAO.save(new Employee(dto.getEmpid(),dto.getAdid(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getPosition(),dto.getBasicSalary()));
+        return employeeDAO.save(new Employee(
+                dto.getEmpid(),
+                dto.getAdid(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getPosition(),
+                dto.getBasicSalary()));
     }
 
     @Override
     public boolean updateEmployee(EmployeeDTO dto) throws SQLException, ClassNotFoundException {
-        return employeeDAO.update(new Employee(dto.getEmpid(),dto.getAdid(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getPosition(),dto.getBasicSalary()));
+        return employeeDAO.update(new Employee(
+                dto.getEmpid(),
+                dto.getAdid(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getPosition(),
+                dto.getBasicSalary()));
     }
 
     @Override
     public EmployeeDTO searchEmployee(String id) throws SQLException, ClassNotFoundException {
         Employee employee = employeeDAO.search(id);
-        EmployeeDTO employeeDTO = new EmployeeDTO(employee.getEmpid(),employee.getAdid(),employee.getName(),employee.getAddress(),employee.getMobile(),employee.getPosition(),employee.getBasicSalary());
-        return employeeDTO;
+        return new EmployeeDTO(
+                employee.getEmpid(),
+                employee.getAdid(),
+                employee.getName(),
+                employee.getAddress(),
+                employee.getMobile(),
+                employee.getPosition(),
+                employee.getBasicSalary());
     }
 
     @Override

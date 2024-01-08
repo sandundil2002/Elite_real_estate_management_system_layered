@@ -18,26 +18,44 @@ public class ScheduleBOImpl implements ScheduleBO {
         List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
 
         for (Schedule schedule : schedules){
-            scheduleDTOS.add(new ScheduleDTO(schedule.getScheduleId(),schedule.getAdminId(),schedule.getDate(),schedule.getTime(),schedule.getStatus()));
+            scheduleDTOS.add(new ScheduleDTO(
+                    schedule.getScheduleId(),
+                    schedule.getAdminId(),
+                    schedule.getDate(),
+                    schedule.getTime(),
+                    schedule.getStatus()));
         }
         return scheduleDTOS;
     }
 
     @Override
     public boolean saveSchedule(ScheduleDTO dto) throws SQLException, ClassNotFoundException {
-        return scheduleDAO.save(new Schedule(dto.getScheduleId(),dto.getAdminId(),dto.getDate(),dto.getTime(),dto.getStatus()));
+        return scheduleDAO.save(new Schedule(
+                dto.getScheduleId(),
+                dto.getAdminId(),
+                dto.getDate(),
+                dto.getTime(),
+                dto.getStatus()));
     }
 
     @Override
     public boolean updateSchedule(ScheduleDTO dto) throws SQLException, ClassNotFoundException {
-        return scheduleDAO.update(new Schedule(dto.getScheduleId(),dto.getAdminId(),dto.getDate(),dto.getTime(),dto.getStatus()));
+        return scheduleDAO.update(new Schedule(
+                dto.getScheduleId(),
+                dto.getAdminId(),
+                dto.getDate(),
+                dto.getTime(),
+                dto.getStatus()));
     }
 
     @Override
     public ScheduleDTO searchSchedule(String id) throws SQLException, ClassNotFoundException {
         Schedule schedule = scheduleDAO.search(id);
-        ScheduleDTO scheduleDTO = new ScheduleDTO(schedule.getScheduleId(),schedule.getAdminId(),schedule.getDate(),schedule.getTime(),schedule.getStatus());
-        return scheduleDTO;
+        return new ScheduleDTO(
+                schedule.getScheduleId(),
+                schedule.getAdminId(),
+                schedule.getDate(),
+                schedule.getTime(),schedule.getStatus());
     }
 
     @Override

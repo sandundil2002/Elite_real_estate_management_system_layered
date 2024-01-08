@@ -18,26 +18,53 @@ public class PropertyBOImpl implements PropertyBO {
         List<PropertyDTO> propertyDTOS = new ArrayList<>();
 
         for (Property property : properties){
-            propertyDTOS.add(new PropertyDTO(property.getPropertyId(),property.getAgentId(),property.getPrice(),property.getAddress(),property.getType(),property.getStatus(),property.getPerches()));
+            propertyDTOS.add(new PropertyDTO(
+                    property.getPropertyId(),
+                    property.getAgentId(),
+                    property.getPrice(),
+                    property.getAddress(),
+                    property.getType(),
+                    property.getStatus(),
+                    property.getPerches()));
         }
         return propertyDTOS;
     }
 
     @Override
     public boolean saveProperty(PropertyDTO dto) throws SQLException, ClassNotFoundException {
-        return propertyDAO.save(new Property(dto.getPropertyId(),dto.getAgentId(),dto.getPrice(),dto.getAddress(),dto.getType(),dto.getStatus(),dto.getPerches()));
+        return propertyDAO.save(new Property(
+                dto.getPropertyId(),
+                dto.getAgentId(),
+                dto.getPrice(),
+                dto.getAddress(),
+                dto.getType(),
+                dto.getStatus(),
+                dto.getPerches()));
     }
 
     @Override
     public boolean updateProperty(PropertyDTO dto) throws SQLException, ClassNotFoundException {
-        return propertyDAO.update(new Property(dto.getPropertyId(),dto.getAgentId(),dto.getPrice(),dto.getAddress(),dto.getType(),dto.getStatus(),dto.getPerches()));
+        return propertyDAO.update(new Property(
+                dto.getPropertyId(),
+                dto.getAgentId(),
+                dto.getPrice(),
+                dto.getAddress(),
+                dto.getType(),
+                dto.getStatus(),
+                dto.getPerches()));
     }
 
     @Override
     public PropertyDTO searchProperty(String id) throws SQLException, ClassNotFoundException {
         Property property = propertyDAO.search(id);
-        PropertyDTO propertyDTO = new PropertyDTO(property.getPropertyId(),property.getAgentId(),property.getPrice(),property.getAddress(),property.getType(),property.getStatus(),property.getPerches());
-        return propertyDTO;
+        return new PropertyDTO(
+                property.getPropertyId(),
+                property.getAgentId(),
+                property.getPrice(),
+                property.getAddress(),
+                property.getType(),
+                property.getStatus(),
+                property.getPerches());
     }
 
     @Override

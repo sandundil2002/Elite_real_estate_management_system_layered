@@ -18,26 +18,41 @@ public class SalaryBOImpl implements SalaryBO {
         List<SalaryDTO> salaryDTOS = new ArrayList<>();
 
         for (Salary salary : salaries){
-            salaryDTOS.add(new SalaryDTO(salary.getSalary_id(),salary.getEmployee_id(),salary.getDate(),salary.getAmount()));
+            salaryDTOS.add(new SalaryDTO(
+                    salary.getSalary_id(),
+                    salary.getEmployee_id(),
+                    salary.getDate(),
+                    salary.getAmount()));
         }
         return salaryDTOS;
     }
 
     @Override
     public boolean saveSalary(SalaryDTO dto) throws SQLException, ClassNotFoundException {
-        return salaryDAO.save(new Salary(dto.getSalary_id(),dto.getEmployee_id(),dto.getDate(),dto.getAmount()));
+        return salaryDAO.save(new Salary(
+                dto.getSalary_id(),
+                dto.getEmployee_id(),
+                dto.getDate(),
+                dto.getAmount()));
     }
 
     @Override
     public boolean updateSalary(SalaryDTO dto) throws SQLException, ClassNotFoundException {
-        return salaryDAO.update(new Salary(dto.getSalary_id(),dto.getEmployee_id(),dto.getDate(),dto.getAmount()));
+        return salaryDAO.update(new Salary(
+                dto.getSalary_id(),
+                dto.getEmployee_id(),
+                dto.getDate(),
+                dto.getAmount()));
     }
 
     @Override
     public SalaryDTO searchSalary(String id) throws SQLException, ClassNotFoundException {
         Salary salary = salaryDAO.search(id);
-        SalaryDTO salaryDTO = new SalaryDTO(salary.getSalary_id(),salary.getEmployee_id(),salary.getDate(),salary.getAmount());
-        return salaryDTO;
+        return new SalaryDTO(
+                salary.getSalary_id(),
+                salary.getEmployee_id(),
+                salary.getDate(),
+                salary.getAmount());
     }
 
     @Override

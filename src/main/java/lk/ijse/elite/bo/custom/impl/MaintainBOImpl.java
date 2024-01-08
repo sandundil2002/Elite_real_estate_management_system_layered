@@ -18,26 +18,41 @@ public class MaintainBOImpl implements MaintainBO {
         List<MaintainDTO> maintainDTOS = new ArrayList<>();
 
         for (Maintain maintain : maintains){
-            maintainDTOS.add(new MaintainDTO(maintain.getMaintain_id(),maintain.getRent_id(),maintain.getDate(),maintain.getStatus()));
+            maintainDTOS.add(new MaintainDTO(
+                    maintain.getMaintain_id(),
+                    maintain.getRent_id(),
+                    maintain.getDate(),
+                    maintain.getStatus()));
         }
         return maintainDTOS;
     }
 
     @Override
     public boolean saveMaintain(MaintainDTO dto) throws SQLException, ClassNotFoundException {
-        return maintainDAO.save(new Maintain(dto.getMaintain_id(),dto.getRent_id(),dto.getDate(),dto.getStatus()));
+        return maintainDAO.save(new Maintain(
+                dto.getMaintain_id(),
+                dto.getRent_id(),
+                dto.getDate(),
+                dto.getStatus()));
     }
 
     @Override
     public boolean updateMaintain(MaintainDTO dto) throws SQLException, ClassNotFoundException {
-        return maintainDAO.update(new Maintain(dto.getMaintain_id(),dto.getRent_id(),dto.getDate(),dto.getStatus()));
+        return maintainDAO.update(new Maintain(
+                dto.getMaintain_id(),
+                dto.getRent_id(),
+                dto.getDate(),
+                dto.getStatus()));
     }
 
     @Override
     public MaintainDTO searchMaintain(String id) throws SQLException, ClassNotFoundException {
         Maintain maintain = maintainDAO.search(id);
-        MaintainDTO maintainDTO = new MaintainDTO(maintain.getMaintain_id(),maintain.getRent_id(),maintain.getDate(),maintain.getStatus());
-        return maintainDTO;
+        return new MaintainDTO(
+                maintain.getMaintain_id(),
+                maintain.getRent_id(),
+                maintain.getDate(),
+                maintain.getStatus());
     }
 
     @Override

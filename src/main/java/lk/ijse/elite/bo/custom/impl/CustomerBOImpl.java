@@ -18,26 +18,49 @@ public class CustomerBOImpl implements CustomerBO {
         List<CustomerDTO> customerDTOS = new ArrayList<>();
 
         for (Customer customer : customers){
-            customerDTOS.add(new CustomerDTO(customer.getCustomer_id(),customer.getShedule_id(),customer.getName(),customer.getAddress(),customer.getMobile(),customer.getEmail()));
+            customerDTOS.add(new CustomerDTO(
+                    customer.getCustomer_id(),
+                    customer.getShedule_id(),
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getMobile(),
+                    customer.getEmail()));
         }
         return customerDTOS;
     }
 
     @Override
     public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return customerDAO.save(new Customer(dto.getCustomer_id(),dto.getShedule_id(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getEmail()));
+        return customerDAO.save(new Customer(
+                dto.getCustomer_id(),
+                dto.getShedule_id(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getEmail()));
     }
 
     @Override
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return customerDAO.update(new Customer(dto.getCustomer_id(),dto.getShedule_id(),dto.getName(),dto.getAddress(),dto.getMobile(),dto.getEmail()));
+        return customerDAO.update(new Customer(
+                dto.getCustomer_id(),
+                dto.getShedule_id(),
+                dto.getName(),
+                dto.getAddress(),
+                dto.getMobile(),
+                dto.getEmail()));
     }
 
     @Override
     public CustomerDTO searchCustomer(String id) throws SQLException, ClassNotFoundException {
         Customer customer = customerDAO.search(id);
-        CustomerDTO customerDTO = new CustomerDTO(customer.getCustomer_id(),customer.getShedule_id(),customer.getName(),customer.getAddress(),customer.getMobile(),customer.getEmail());
-        return customerDTO;
+        return new CustomerDTO(
+                customer.getCustomer_id(),
+                customer.getShedule_id(),
+                customer.getName(),
+                customer.getAddress(),
+                customer.getMobile(),
+                customer.getEmail());
     }
 
     @Override
