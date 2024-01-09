@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class EmployeeManageformController {
-
     public TextField txtEmpid;
     public TextField txtName;
     public TextField txtAddress;
@@ -147,11 +146,11 @@ public class EmployeeManageformController {
                 boolean isDeleted = employeeBO.deleteEmployee(eid);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee Delete Succesfull!!!").show();
-                    clearFields();
+                    initialize();
                 }
             }else {
                 new Alert(Alert.AlertType.WARNING, "Employee Not Found!!!").show();
-                clearFields();
+                initialize();
             }
         } catch (SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -170,6 +169,7 @@ public class EmployeeManageformController {
                 fillFields(dto);
             } else {
                 new Alert(Alert.AlertType.INFORMATION, "Employee not found!").show();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

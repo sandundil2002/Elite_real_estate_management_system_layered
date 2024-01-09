@@ -57,14 +57,17 @@ public class PropertyBOImpl implements PropertyBO {
     @Override
     public PropertyDTO searchProperty(String id) throws SQLException, ClassNotFoundException {
         Property property = propertyDAO.search(id);
-        return new PropertyDTO(
-                property.getPropertyId(),
-                property.getAgentId(),
-                property.getPrice(),
-                property.getAddress(),
-                property.getType(),
-                property.getStatus(),
-                property.getPerches());
+        if (property != null) {
+            return new PropertyDTO(
+                    property.getPropertyId(),
+                    property.getAgentId(),
+                    property.getPrice(),
+                    property.getAddress(),
+                    property.getType(),
+                    property.getStatus(),
+                    property.getPerches());
+        }
+        return null;
     }
 
     @Override

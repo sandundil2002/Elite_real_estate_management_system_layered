@@ -25,13 +25,10 @@ public class PropertymanageFormcCntroller {
     public ChoiceBox cmbType;
     @FXML
     private TextField txtAddress;
-    
     @FXML
     private TextField txtPerches;
-
     @FXML
     private TextField txtPrice;
-
     @FXML
     private TextField txtPropertyId;
     PropertyBO propertyBO = new PropertyBOImpl();
@@ -103,7 +100,7 @@ public class PropertymanageFormcCntroller {
                 fillFields(dto);
             } else {
                 new Alert(Alert.AlertType.INFORMATION, "Property Not Found!!!").show();
-                clearFields();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

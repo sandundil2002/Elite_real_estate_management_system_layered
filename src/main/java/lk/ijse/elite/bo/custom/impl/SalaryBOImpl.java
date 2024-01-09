@@ -48,11 +48,14 @@ public class SalaryBOImpl implements SalaryBO {
     @Override
     public SalaryDTO searchSalary(String id) throws SQLException, ClassNotFoundException {
         Salary salary = salaryDAO.search(id);
-        return new SalaryDTO(
-                salary.getSalary_id(),
-                salary.getEmployee_id(),
-                salary.getDate(),
-                salary.getAmount());
+        if (salary != null) {
+            return new SalaryDTO(
+                    salary.getSalary_id(),
+                    salary.getEmployee_id(),
+                    salary.getDate(),
+                    salary.getAmount());
+        }
+        return null;
     }
 
     @Override

@@ -78,12 +78,11 @@ public class CustomerManageFormController {
         String cid = txtCustomerid.getText();
         try {
             CustomerDTO dto = customerBO.searchCustomer(cid);
-
             if(dto != null) {
                 fillFields(dto);
             } else {
                 new Alert(Alert.AlertType.INFORMATION, "Customer Not Found!!!").show();
-                clearFields();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

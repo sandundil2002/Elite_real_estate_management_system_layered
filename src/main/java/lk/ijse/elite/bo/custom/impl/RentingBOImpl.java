@@ -52,12 +52,15 @@ public class RentingBOImpl implements RentingBO {
     @Override
     public RentDTO searchRenting(String id) throws SQLException, ClassNotFoundException {
         Rent rent = rentingDAO.search(id);
-        return new RentDTO(
-                rent.getRentId(),
-                rent.getPropertyId(),
-                rent.getCustomerId(),
-                rent.getDate(),
-                rent.getDuration());
+        if (rent != null) {
+            return new RentDTO(
+                    rent.getRentId(),
+                    rent.getPropertyId(),
+                    rent.getCustomerId(),
+                    rent.getDate(),
+                    rent.getDuration());
+        }
+        return null;
     }
 
     @Override

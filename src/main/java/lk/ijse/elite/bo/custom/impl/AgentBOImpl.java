@@ -50,12 +50,15 @@ public class AgentBOImpl implements AgentBO {
     @Override
     public AgentDTO searchAgent(String id) throws SQLException, ClassNotFoundException {
         Agent agent = agentDAO.search(id);
-        return new AgentDTO(
-                agent.getAgent_id(),
-                agent.getName(),
-                agent.getAddress(),
-                agent.getMobile(),
-                agent.getEmail());
+        if (agent != null) {
+            return new AgentDTO(
+                    agent.getAgent_id(),
+                    agent.getName(),
+                    agent.getAddress(),
+                    agent.getMobile(),
+                    agent.getEmail());
+        }
+        return null;
     }
 
     @Override

@@ -51,11 +51,14 @@ public class ScheduleBOImpl implements ScheduleBO {
     @Override
     public ScheduleDTO searchSchedule(String id) throws SQLException, ClassNotFoundException {
         Schedule schedule = scheduleDAO.search(id);
-        return new ScheduleDTO(
-                schedule.getScheduleId(),
-                schedule.getAdminId(),
-                schedule.getDate(),
-                schedule.getTime(),schedule.getStatus());
+        if (schedule != null) {
+            return new ScheduleDTO(
+                    schedule.getScheduleId(),
+                    schedule.getAdminId(),
+                    schedule.getDate(),
+                    schedule.getTime(), schedule.getStatus());
+        }
+        return null;
     }
 
     @Override

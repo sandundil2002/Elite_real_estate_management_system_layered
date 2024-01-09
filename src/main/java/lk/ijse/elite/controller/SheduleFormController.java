@@ -70,6 +70,7 @@ public class SheduleFormController {
             boolean isSaved = scheduleBO.saveSchedule(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Added Succesfull").show();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -84,7 +85,6 @@ public class SheduleFormController {
         String date = txtDate.getValue().toString();
         String time = txtTime.getText();
         String status = txtStatus.getText();
-
 
         boolean isSheduleValidated = validateShedule();
         if (!isSheduleValidated) {

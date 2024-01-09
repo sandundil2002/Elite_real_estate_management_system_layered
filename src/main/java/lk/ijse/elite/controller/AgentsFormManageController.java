@@ -43,7 +43,6 @@ public class AgentsFormManageController {
             boolean isSaved = agentBO.saveAgent(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Added Succesfull").show();
-                clearFields();
                 initialize();
             }
         } catch (SQLException e) {
@@ -94,6 +93,9 @@ public class AgentsFormManageController {
             boolean isDeleted = agentBO.deleteAgent(agentid);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Deleted Succesfull").show();
+                initialize();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Agent Not Found").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
