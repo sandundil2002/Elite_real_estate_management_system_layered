@@ -44,13 +44,13 @@ public class RentPropertyFormController {
 
 
     public void initialize(){
-        loadAllProperty();
-        loadAllCustomer();
         try {
+            loadAllProperty();
+            loadAllCustomer();
             autoGenarateRentId();
             autoGenaratePaymentId();
         } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
         txtDate.setValue(java.time.LocalDate.now());
@@ -59,9 +59,7 @@ public class RentPropertyFormController {
             try {
                 PropertyDTO propertyDto = propertyBO.searchProperty(t1.toString());
                 txtPropertyPrice.setText(propertyDto.getPrice());
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
@@ -70,9 +68,7 @@ public class RentPropertyFormController {
             try {
                 CustomerDTO customerDto = customerBO.searchCustomer(t1.toString());
                 txtCustomerName.setText(customerDto.getName());
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
@@ -108,7 +104,7 @@ public class RentPropertyFormController {
                 autoGenarateRentId();
             }
         } catch(SQLException | ClassNotFoundException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -126,9 +122,7 @@ public class RentPropertyFormController {
                 obList.add(propertyDto.getPropertyId());
             }
             comProid.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -143,9 +137,7 @@ public class RentPropertyFormController {
             }
 
             comCusid.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -166,7 +158,7 @@ public class RentPropertyFormController {
                     );
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException | SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 

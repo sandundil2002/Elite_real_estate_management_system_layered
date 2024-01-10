@@ -71,8 +71,8 @@ public class MaintainFormController {
                             } else {
                                 new Alert(Alert.AlertType.WARNING, "Try Again", ButtonType.OK).show();
                             }
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
+                        } catch (Exception ex) {
+                            new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
                 });
@@ -92,7 +92,7 @@ public class MaintainFormController {
                                 new Alert(Alert.AlertType.WARNING, "Try Again", ButtonType.OK).show();
                             }
                         } catch (Exception exception) {
-                            exception.printStackTrace();
+                            new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
                         }
                     }
                 });

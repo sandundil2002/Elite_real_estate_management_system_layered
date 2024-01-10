@@ -50,9 +50,7 @@ public class MaintainmanageFormController {
             } else {
                 new Alert(Alert.AlertType.WARNING, "Maintenance Not Added Please try again!!!").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.WARNING, "Maintenance Not Added Please try again!!!").show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.WARNING, "Maintenance Not Added Please try again!!!").show();
         }
     }
@@ -68,9 +66,7 @@ public class MaintainmanageFormController {
             }
 
             cmbRentId.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.WARNING, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.WARNING, e.getMessage()).show();
         }
     }

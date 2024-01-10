@@ -45,10 +45,8 @@ public class PropertymanageFormcCntroller {
         txtAgentid.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
                 txtAgentid.setValue(agentBO.searchAgent(t1.toString()).getAgent_id());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } catch (SQLException | ClassNotFoundException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
 
@@ -85,9 +83,7 @@ public class PropertymanageFormcCntroller {
                 new Alert(Alert.AlertType.CONFIRMATION, "Property Update Succesfull!!!").show();
                 clearFields();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -102,9 +98,7 @@ public class PropertymanageFormcCntroller {
                 new Alert(Alert.AlertType.INFORMATION, "Property Not Found!!!").show();
                 initialize();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -140,9 +134,7 @@ public class PropertymanageFormcCntroller {
                 clearFields();
                 autoGenerateId();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -157,10 +149,8 @@ public class PropertymanageFormcCntroller {
                 obList.add(agentDto.getAgent_id());
             }
             txtAgentid.setItems(obList);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
     private boolean validateProperty() {

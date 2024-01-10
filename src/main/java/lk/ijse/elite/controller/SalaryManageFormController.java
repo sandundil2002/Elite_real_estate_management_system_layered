@@ -43,9 +43,7 @@ public class SalaryManageFormController {
                 txtEmployeeid.setText(employee.getEmpid());
                 txtName.setText(employee.getName());
                 txtAmount.setText(employee.getBasicSalary());
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
@@ -67,10 +65,8 @@ public class SalaryManageFormController {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Salary Paid Succesfull").show();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -84,9 +80,7 @@ public class SalaryManageFormController {
                 obList.add(employeeDto.getPosition());
             }
             cmdPosition.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

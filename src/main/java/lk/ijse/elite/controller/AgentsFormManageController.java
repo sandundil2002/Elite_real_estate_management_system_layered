@@ -42,12 +42,12 @@ public class AgentsFormManageController {
         try {
             boolean isSaved = agentBO.saveAgent(dto);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Agent Added Succesfull").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Agent Registration Completed").show();
                 initialize();
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Something went wrong please try again...!").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -79,9 +79,7 @@ public class AgentsFormManageController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Agent Update Succesfull!!!").show();
                 clearFields();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -97,9 +95,7 @@ public class AgentsFormManageController {
             } else {
                 new Alert(Alert.AlertType.ERROR,"Agent Not Found").show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

@@ -32,7 +32,7 @@ public class EmployeeManageformController {
             autoGenerateId();
             loadAllAdmin();
         } catch (SQLException  | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
         cmbEmployeeposition.getItems().addAll("Director","Project Manager","Chief Operation","Chief Executive","lawyer","General Manager","Sales Manager","Charted Accountant","Admin Manager","Customer Service");
@@ -94,9 +94,7 @@ public class EmployeeManageformController {
                 initialize();
                 clearFields();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -130,9 +128,7 @@ public class EmployeeManageformController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Update Succesfull!!!").show();
                 clearFields();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -152,9 +148,7 @@ public class EmployeeManageformController {
                 new Alert(Alert.AlertType.WARNING, "Employee Not Found!!!").show();
                 initialize();
             }
-        } catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -171,9 +165,7 @@ public class EmployeeManageformController {
                 new Alert(Alert.AlertType.INFORMATION, "Employee not found!").show();
                 initialize();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -197,7 +189,7 @@ public class EmployeeManageformController {
             }
             cmbAdminid.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

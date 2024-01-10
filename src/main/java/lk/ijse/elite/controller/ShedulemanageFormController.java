@@ -46,11 +46,11 @@ public class ShedulemanageFormController {
     ScheduleBO scheduleBO = new ScheduleBOImpl();
 
     public void initialize(){
-        setCellValueFactory();
         try {
+            setCellValueFactory();
             loadAllShedules();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -74,7 +74,7 @@ public class ShedulemanageFormController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
     }
 
@@ -102,9 +102,7 @@ public class ShedulemanageFormController {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Update Succesfull!!!").show();
                                 initialize();
                             }
-                        } catch (SQLException ex) {
-                            new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
-                        } catch (ClassNotFoundException ex) {
+                        } catch (SQLException | ClassNotFoundException ex) {
                             new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
@@ -122,9 +120,7 @@ public class ShedulemanageFormController {
                                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule Update Succesfull!!!").show();
                                 initialize();
                             }
-                        } catch (SQLException ex) {
-                            new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
-                        } catch (ClassNotFoundException ex) {
+                        } catch (SQLException | ClassNotFoundException ex) {
                             new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
@@ -142,9 +138,7 @@ public class ShedulemanageFormController {
                 ));
             }
             tblShedule.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

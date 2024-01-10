@@ -57,9 +57,7 @@ public class CustomerManageFormController {
                 clearFields();
                 autoGenerateId();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -84,9 +82,7 @@ public class CustomerManageFormController {
                 new Alert(Alert.AlertType.INFORMATION, "Customer Not Found!!!").show();
                 initialize();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -116,9 +112,7 @@ public class CustomerManageFormController {
                 new Alert(Alert.AlertType.ERROR, "Customer Not Found!!!").show();
                 clearFields();
             }
-        } catch (SQLException e){
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -144,9 +138,7 @@ public class CustomerManageFormController {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer Update Succesfull!!!").show();
                 clearFields();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -195,9 +187,7 @@ public class CustomerManageFormController {
                 obList.add(sheduleDto.getScheduleId());
             }
             cmbSheduleid.setItems(obList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

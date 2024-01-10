@@ -54,16 +54,11 @@ public class MainDashboardFormController {
         try {
             populateChart(barChart);
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     private void populateChart(BarChart<String, Number> barChart) throws SQLException, ClassNotFoundException {
-//        Connection connection = DbConnection.getInstance().getConnection();
-//        String sql = "SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type";
-//        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//        ResultSet resultSet = preparedStatement.executeQuery();
-
         ResultSet resultSet = SQLUtil.sql("SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type");
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         while (resultSet.next()) {
@@ -77,13 +72,10 @@ public class MainDashboardFormController {
         }
     }
 
-
     private int getTotalPropertiesCount() {
         try {
             return dashboardBO.getTotalPropertiesCount();
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
         return 0;
@@ -92,9 +84,7 @@ public class MainDashboardFormController {
     private int getTotalAppointmentsCount() {
         try {
             return dashboardBO.getTotalAppointmentsCount();
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
         return 0;
@@ -122,8 +112,8 @@ public class MainDashboardFormController {
                 ));
             }
             tblTodayAppointment.setItems(obList);
-    } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 }

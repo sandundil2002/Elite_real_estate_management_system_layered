@@ -43,7 +43,7 @@ public class RentalFormController {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PropertyForm.fxml"));
             rentPane.getChildren().add(anchorPane);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -83,7 +83,7 @@ public class RentalFormController {
                             stage.setScene(scene);
                             stage.show();
                         } catch (IOException ex) {
-                            ex.printStackTrace();
+                            new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
                 });
@@ -102,9 +102,7 @@ public class RentalFormController {
                             }else{
                                 new Alert(Alert.AlertType.ERROR, "Failed to delete the Renting").show();
                             }
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        } catch (ClassNotFoundException ex) {
+                        } catch (SQLException | ClassNotFoundException ex) {
                             new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
@@ -121,9 +119,7 @@ public class RentalFormController {
                 ));
             }
             tblRent.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -134,7 +130,7 @@ public class RentalFormController {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/maintain_Form.fxml"));
             rentPane.getChildren().add(anchorPane);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 }

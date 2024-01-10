@@ -4,19 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import lk.ijse.elite.bo.custom.CustomerBO;
-import lk.ijse.elite.bo.custom.PaymentBO;
-import lk.ijse.elite.bo.custom.PropertyBO;
-import lk.ijse.elite.bo.custom.SellOrderBO;
-import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
-import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
-import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
-import lk.ijse.elite.bo.custom.impl.SellOrderBOImpl;
+import lk.ijse.elite.bo.custom.*;
+import lk.ijse.elite.bo.custom.impl.*;
 import lk.ijse.elite.db.DbConnection;
-import lk.ijse.elite.entity.Payment;
-import lk.ijse.elite.entity.PaymentDetail;
-import lk.ijse.elite.dto.CustomerDTO;
-import lk.ijse.elite.dto.PropertyDTO;
+import lk.ijse.elite.entity.*;
+import lk.ijse.elite.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -54,9 +46,7 @@ public class PlaceorderFromController {
             try {
                 PropertyDTO propertyDto = propertyBO.searchProperty(t1.toString());
                 txtPropertyPrice.setText(propertyDto.getPrice());
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
@@ -65,9 +55,7 @@ public class PlaceorderFromController {
             try {
                 CustomerDTO customerDto = customerBO.searchCustomer(t1.toString());
                 txtCustomerName.setText(customerDto.getName());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
@@ -96,9 +84,7 @@ public class PlaceorderFromController {
                 btnClearOnAction();
                 autoGenarateId();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -119,9 +105,7 @@ public class PlaceorderFromController {
                 obList.add(propertyDto.getPropertyId());
             }
             comProid.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -136,9 +120,7 @@ public class PlaceorderFromController {
             }
 
             comCusid.setItems(obList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -159,10 +141,9 @@ public class PlaceorderFromController {
                     );
         JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException | SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     private void autoGenarateId() throws SQLException, ClassNotFoundException {
         txtPaymentid.setText(paymentBO.generatePaymentId());

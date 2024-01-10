@@ -67,7 +67,7 @@ public class PropertyFormController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
     @FXML
@@ -81,7 +81,7 @@ public class PropertyFormController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
     private void loadAllProperty() {
@@ -108,9 +108,7 @@ public class PropertyFormController {
                             } else {
                                 new Alert(Alert.AlertType.WARNING, "Try Again !", ButtonType.OK).show();
                             }
-                        } catch (SQLException ex) {
-                            new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
-                        } catch (ClassNotFoundException ex) {
+                        } catch (SQLException | ClassNotFoundException ex) {
                             new Alert(Alert.AlertType.ERROR, ex.getMessage()).show();
                         }
                     }
@@ -127,9 +125,7 @@ public class PropertyFormController {
                 ));
             }
             tblproperty.setItems(obList);
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -161,7 +157,7 @@ public class PropertyFormController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 }

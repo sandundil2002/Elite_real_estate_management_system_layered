@@ -8,9 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.custom.AdminBO;
-import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
-import lk.ijse.elite.bo.custom.impl.DashboardBOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,10 +43,8 @@ public class AdminloginFormController {
             stage.centerOnScreen();
             dashboardBO.Animation(anchorPane);
         }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

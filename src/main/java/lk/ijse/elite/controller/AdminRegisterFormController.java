@@ -56,10 +56,13 @@ public class AdminRegisterFormController {
         try {
             boolean isSaved = adminBO.saveAdmin(dto);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Admin Register Succesfull").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Admin Registration Completed").show();
+                clearFields();
                 btnLoginOnAction(actionEvent);
+            } else {
+                new Alert(Alert.AlertType.ERROR,"Something went wrong please try again...!").show();
             }
-        } catch (SQLException |ClassNotFoundException | RuntimeException |IOException e) {
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

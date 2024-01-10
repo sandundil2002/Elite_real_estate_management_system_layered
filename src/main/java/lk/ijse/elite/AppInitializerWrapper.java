@@ -1,4 +1,5 @@
-package lk.ijse.elite.view;
+package lk.ijse.elite;
+
 
 public class AppInitializerWrapper {
     public static void main(String[] args) {

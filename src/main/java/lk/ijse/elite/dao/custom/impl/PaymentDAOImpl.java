@@ -74,7 +74,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean isPaymentSuccess(Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException, ClassNotFoundException {
+    public boolean isPaymentSuccess(Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
         try{
             TransactionUtil.startTransaction();
             boolean isPaymentSaved = save(paymentDto);
@@ -89,7 +89,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             }
             TransactionUtil.rollBack();
             return false;
-        } catch (SQLException e){
+        } catch (SQLException | ClassNotFoundException e){
             TransactionUtil.rollBack();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } finally {
