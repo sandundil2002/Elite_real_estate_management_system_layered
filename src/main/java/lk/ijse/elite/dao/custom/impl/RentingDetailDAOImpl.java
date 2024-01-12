@@ -9,12 +9,12 @@ import java.util.List;
 
 public class RentingDetailDAOImpl implements RentingDetailDAO {
     @Override
-    public List<RentingDetail> loadAll() throws SQLException, ClassNotFoundException {
+    public List<RentingDetail> loadAll() throws SQLException{
         return null;
     }
 
     @Override
-    public boolean save(RentingDetail dto) throws SQLException, ClassNotFoundException {
+    public boolean save(RentingDetail dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO renting_details VALUES(?,?,?)",
                 dto.getRentId(),
                 dto.getPropertyId(),
@@ -22,22 +22,22 @@ public class RentingDetailDAOImpl implements RentingDetailDAO {
     }
 
     @Override
-    public boolean update(RentingDetail dto) throws SQLException, ClassNotFoundException {
+    public boolean update(RentingDetail dto) throws SQLException{
         return false;
     }
 
     @Override
-    public RentingDetail search(String id) throws SQLException, ClassNotFoundException {
+    public RentingDetail search(String id) throws SQLException{
         return null;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return false;
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         return null;
     }
 }

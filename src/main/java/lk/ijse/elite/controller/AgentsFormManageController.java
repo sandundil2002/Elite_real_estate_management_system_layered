@@ -3,6 +3,7 @@ package lk.ijse.elite.controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.dto.AgentDTO;
@@ -15,7 +16,7 @@ public class AgentsFormManageController {
     public TextField txtAddress;
     public TextField txtMobile;
     public TextField txtEmail;
-    AgentBO agentBO = new AgentBOImpl();
+    AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
 
     public void initialize() {
         try {

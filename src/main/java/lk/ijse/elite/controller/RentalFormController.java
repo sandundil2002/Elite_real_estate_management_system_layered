@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.RentingBO;
 import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
 import lk.ijse.elite.dto.RentingDTO;
@@ -30,7 +31,7 @@ public class RentalFormController {
     public TableView tblRent;
     public TableColumn colMaintain;
     public TableColumn colDelete;
-    RentingBO rentingBO = new RentingBOImpl();
+    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
 
     public void initialize() throws SQLException {
         setCellValueFactories();

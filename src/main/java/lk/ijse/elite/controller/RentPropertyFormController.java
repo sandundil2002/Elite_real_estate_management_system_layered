@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.*;
 import lk.ijse.elite.bo.custom.impl.*;
 import lk.ijse.elite.db.DbConnection;
@@ -37,10 +38,10 @@ public class RentPropertyFormController {
     public TextField txtpayId;
     public ChoiceBox cmdPaymethod;
     public ChoiceBox cmdDuration;
-    RentingBO rentingBO = new RentingBOImpl();
-    CustomerBO customerBO = new CustomerBOImpl();
-    PaymentBO paymentBO = new PaymentBOImpl();
-    PropertyBO propertyBO = new PropertyBOImpl();
+    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
 
     public void initialize(){

@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.bo.custom.PropertyBO;
 import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
@@ -31,8 +32,8 @@ public class PropertymanageFormcCntroller {
     private TextField txtPrice;
     @FXML
     private TextField txtPropertyId;
-    PropertyBO propertyBO = new PropertyBOImpl();
-    AgentBO agentBO = new AgentBOImpl();
+    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
+    AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
 
     public void initialize(){
         try {

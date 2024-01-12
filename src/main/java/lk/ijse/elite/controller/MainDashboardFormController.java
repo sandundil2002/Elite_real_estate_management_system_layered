@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.bo.custom.impl.DashboardBOImpl;
 import lk.ijse.elite.dto.TodayAppoinmentsDTO;
@@ -33,7 +34,7 @@ public class MainDashboardFormController {
     public Label lblTotalPro;
     public Label lblTotalApp;
     public BarChart<String, Number> barChart;
-    DashboardBO dashboardBO = new DashboardBOImpl();
+    DashboardBO dashboardBO = (DashboardBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.DASHBOARD);
 
     public void initialize() {
         loadTodayShedules();
@@ -58,7 +59,7 @@ public class MainDashboardFormController {
         }
     }
 
-    private void populateChart(BarChart<String, Number> barChart) throws SQLException, ClassNotFoundException {
+    private void populateChart(BarChart<String, Number> barChart) throws SQLException,ClassNotFoundException{
         ResultSet resultSet = SQLUtil.sql("SELECT Type, COUNT(*) as Count FROM Property GROUP BY Type");
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         while (resultSet.next()) {

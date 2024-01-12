@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.PaymentBO;
 import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.elite.dto.PaymentDTO;
@@ -23,7 +24,7 @@ public class PaymentsFormController {
     public TableColumn colMethod;
     @FXML
     private TableView<PaymentTM> tblPayment;
-    PaymentBO paymentBO = new PaymentBOImpl();
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
 
     public void initialize() {
         cellValueFactory();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AdminDAOImpl implements AdminDAO {
     @Override
-    public List<Admin> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Admin> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin");
         List<Admin> adminList = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean save(Admin dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Admin dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO admin VALUES (?,?,?,?,?,?)",
                 dto.getAdmin_id(),
                 dto.getName(),
@@ -39,18 +39,18 @@ public class AdminDAOImpl implements AdminDAO {
                 dto.getEmail());
     }
 
-    public boolean searchAdminPassword(String string) throws SQLException, ClassNotFoundException {
+    public boolean searchAdminPassword(String string) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin WHERE password=?", string);
         return resultSet.next();
     }
 
-    public boolean searchAdminUserId(String string) throws SQLException, ClassNotFoundException {
+    public boolean searchAdminUserId(String string) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin WHERE Admin_id=?", string);
         return resultSet.next();
     }
 
     @Override
-    public Admin search(String id) throws SQLException, ClassNotFoundException {
+    public Admin search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin WHERE Admin_id=?",id);
         resultSet.next();
             return new Admin(id+ " ",resultSet.getString("name"),
@@ -61,17 +61,17 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return false;
     }
 
     @Override
-    public boolean update(Admin dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Admin dto) throws SQLException{
         return false;
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Admin_id FROM admin ORDER BY Admin_id DESC LIMIT 1");
         if (resultSet.next()) {
             String id = resultSet.getString("Admin_id");

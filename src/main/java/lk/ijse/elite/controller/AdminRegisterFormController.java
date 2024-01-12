@@ -7,7 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
+import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
 import lk.ijse.elite.dto.AdminDTO;
 import lk.ijse.elite.sendMail.SendEmail;
@@ -27,13 +29,12 @@ public class AdminRegisterFormController {
     public TextField txtPassword;
     public AnchorPane signupPane;
     int otp;
-    AdminBO adminBO = new AdminBOImpl();
-    DashboardFormController dashboardBO = new DashboardFormController();
+    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
 
     public void initialize() {
         try {
             autoGenerateAdminId();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -104,7 +105,7 @@ public class AdminRegisterFormController {
         stage.setScene(scene);
         stage.setTitle("Admin Login Form");
         stage.centerOnScreen();
-        dashboardBO.Animation(anchorPane);
+        //dashboardBO.Animation(anchorPane);
     }
 
     private boolean validateAdmin() {

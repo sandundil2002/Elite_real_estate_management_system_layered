@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
-    public List<Employee> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Employee> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM employee");
         List<Employee> employeeList = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean save(Employee dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Employee dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO employee VALUES (?,?,?,?,?,?,?)",
                 dto.getEmpid(),
                 dto.getAdid(),
@@ -42,7 +42,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean update(Employee dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Employee dto) throws SQLException{
         return SQLUtil.sql("UPDATE employee SET Admin_id=?,Name=?,Address=?,Mobile=?,Position=?,Basic_salary=? WHERE Employee_id=?",
                 dto.getAdid(),
                 dto.getName(),
@@ -54,7 +54,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee search(String id) throws SQLException, ClassNotFoundException {
+    public Employee search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM employee WHERE Employee_id=?", id);
 
         if (resultSet.next()) {
@@ -72,12 +72,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM employee WHERE Employee_id=?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Employee_id FROM employee ORDER BY Employee_id DESC LIMIT 1");
         if(resultSet.next()){
             String id = resultSet.getString("Employee_id");
@@ -90,7 +90,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee searchEmployeePosition(String position) throws SQLException, ClassNotFoundException {
+    public Employee searchEmployeePosition(String position) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM employee WHERE Position=?", position);
 
         if (resultSet.next()) {

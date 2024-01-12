@@ -17,7 +17,7 @@ import java.util.List;
 public class RentingDAOImpl implements RentingDAO {
     PropertyBO propertyBO = new PropertyBOImpl();
     @Override
-    public List<Rent> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Rent> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM renting");
         ObservableList<Rent> rentingList = FXCollections.observableArrayList();
 
@@ -34,7 +34,7 @@ public class RentingDAOImpl implements RentingDAO {
     }
 
     @Override
-    public boolean save(Rent dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Rent dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO renting VALUES(?,?,?,?,?)",
                 dto.getRentId(),
                 dto.getPropertyId(),
@@ -45,22 +45,22 @@ public class RentingDAOImpl implements RentingDAO {
     }
 
     @Override
-    public boolean update(Rent dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Rent dto) throws SQLException{
         return false;
     }
 
     @Override
-    public Rent search(String id) throws SQLException, ClassNotFoundException {
+    public Rent search(String id) throws SQLException{
         return null;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM renting WHERE rentId=?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT rent_id FROM renting ORDER BY rent_id DESC LIMIT 1");
         if (resultSet.next()){
             String id = resultSet.getString("rent_id");

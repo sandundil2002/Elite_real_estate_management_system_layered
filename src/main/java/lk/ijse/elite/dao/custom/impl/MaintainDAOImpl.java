@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MaintainDAOImpl implements MaintainDAO {
     @Override
-    public List<Maintain> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Maintain> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM maintain");
         List<Maintain> maintainList = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class MaintainDAOImpl implements MaintainDAO {
     }
 
     @Override
-    public boolean save(Maintain dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Maintain dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO maintain VALUES (?,?,?,?)",
                 dto.getMaintain_id(),
                 dto.getRent_id(),
@@ -36,17 +36,17 @@ public class MaintainDAOImpl implements MaintainDAO {
     }
 
     @Override
-    public boolean updateMaintainComplete(String maintainId) throws SQLException, ClassNotFoundException {
+    public boolean updateMaintainComplete(String maintainId) throws SQLException{
         return SQLUtil.sql("UPDATE maintain SET Status = ? WHERE Maintain_id = ?","Completed",maintainId);
     }
 
     @Override
-    public boolean updateMaintainCansel(String maintainId) throws SQLException, ClassNotFoundException {
+    public boolean updateMaintainCansel(String maintainId) throws SQLException{
         return SQLUtil.sql("UPDATE maintain SET Status = ? WHERE Maintain_id = ?","Canceled",maintainId);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Maintain_id FROM maintain ORDER BY Maintain_id DESC LIMIT 1");
         if (resultSet.next()) {
             String id = resultSet.getString("Maintain_id");
@@ -59,17 +59,17 @@ public class MaintainDAOImpl implements MaintainDAO {
     }
 
     @Override
-    public boolean update(Maintain dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Maintain dto) throws SQLException{
         return false;
     }
 
     @Override
-    public Maintain search(String id) throws SQLException, ClassNotFoundException {
+    public Maintain search(String id) throws SQLException{
         return null;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return false;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AgentDAOImpl implements AgentDAO {
     @Override
-    public List<Agent> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Agent> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM agent");
         List<Agent> agentList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class AgentDAOImpl implements AgentDAO {
     }
 
     @Override
-    public boolean save(Agent dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Agent dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO agent VALUES (?,?,?,?,?)",
                 dto.getAgent_id(),
                 dto.getName(),
@@ -38,7 +38,7 @@ public class AgentDAOImpl implements AgentDAO {
     }
 
     @Override
-    public boolean update(Agent dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Agent dto) throws SQLException{
         return SQLUtil.sql("UPDATE agent SET Name = ?, Address = ?, Mobile = ?, Email = ? WHERE agent_id = ?",
                 dto.getName(),
                 dto.getAddress(),
@@ -48,7 +48,7 @@ public class AgentDAOImpl implements AgentDAO {
     }
 
     @Override
-    public Agent search(String id) throws SQLException, ClassNotFoundException {
+    public Agent search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM agent WHERE agent_id = ?", id);
         if (resultSet.next()) {
             return new Agent(resultSet.getString(1),
@@ -61,12 +61,12 @@ public class AgentDAOImpl implements AgentDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM agent WHERE agent_id = ?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT agent_id FROM agent ORDER BY agent_id DESC LIMIT 1");
         if (resultSet.next()) {
             String id = resultSet.getString("agent_id");

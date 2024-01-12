@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.EmployeeBO;
 import lk.ijse.elite.bo.custom.SalaryBO;
 import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
@@ -25,8 +26,8 @@ public class SalaryManageFormController {
     public JFXComboBox cmdPosition;
     public DatePicker dtpDate;
     public TextField txtAmount;
-    SalaryBO salaryBO = new SalaryBOImpl();
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    SalaryBO salaryBO = (SalaryBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SALARY);
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
 
     public void initialize(){
         try {

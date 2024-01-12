@@ -7,6 +7,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.MaintainBO;
 import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
 import lk.ijse.elite.db.DbConnection;
@@ -30,7 +31,7 @@ public class MaintainFormController {
     public TableColumn colStatus;
     public TableColumn colFinished;
     public TableColumn colCansel;
-    MaintainBO maintainBO = new MaintainBOImpl();
+    MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
 
     public void initialize() {
         cellValueFactory();

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.EmployeeBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
@@ -24,8 +25,8 @@ public class EmployeeManageformController {
     public JFXComboBox cmbAdminid;
     public JFXComboBox cmbEmployeeposition;
     public TextField txtAmount;
-    EmployeeBO employeeBO = new EmployeeBOImpl();
-    AdminBO adminBO = new AdminBOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
+    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
 
     public void initialize(){
         try {

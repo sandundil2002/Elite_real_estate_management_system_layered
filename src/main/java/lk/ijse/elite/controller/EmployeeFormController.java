@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.EmployeeBO;
 import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.db.DbConnection;
@@ -38,7 +39,7 @@ public class EmployeeFormController {
     public TableColumn colSalary;
     @FXML
     private TableView<EmployeeTM> tblEmployee;
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
 
     public void initialize() {
         cellValueFactory();

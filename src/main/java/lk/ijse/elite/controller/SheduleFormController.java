@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.ScheduleBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
@@ -30,8 +31,8 @@ public class SheduleFormController {
     public DatePicker txtDate;
     public ComboBox cmbAdminId;
     public TextField txtStatus;
-    ScheduleBO scheduleBO = new ScheduleBOImpl();
-    AdminBO adminBO = new AdminBOImpl();
+    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
+    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
 
     public void initialize(){
         try {

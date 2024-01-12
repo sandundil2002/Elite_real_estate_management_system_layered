@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DashboardDAOImpl implements DashboardDAO {
     @Override
-    public List<Today> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Today> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT schedule.Shedule_id,customer.Name,Schedule.Time,customer.Mobile FROM customer JOIN Schedule ON customer.Shedule_id = Schedule.Shedule_id WHERE Schedule.Date = CURDATE() ORDER BY Schedule.Shedule_id ASC");
         List<Today> TodayList = new ArrayList<>();
 
@@ -27,38 +27,38 @@ public class DashboardDAOImpl implements DashboardDAO {
     }
 
     @Override
-    public int getTotalAppointmentsCount() throws SQLException, ClassNotFoundException {
+    public int getTotalAppointmentsCount() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT COUNT(*) FROM schedule");
         return resultSet.next() ? resultSet.getInt(1) : 0;
     }
 
     @Override
-    public int getTotalPropertiesCount() throws SQLException, ClassNotFoundException {
+    public int getTotalPropertiesCount() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT COUNT(*) FROM property");
         return resultSet.next() ? resultSet.getInt(1) : 0;
     }
     @Override
-    public boolean save(Today dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Today dto) throws SQLException{
         return false;
     }
 
     @Override
-    public boolean update(Today dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Today dto) throws SQLException{
         return false;
     }
 
     @Override
-    public Today search(String id) throws SQLException, ClassNotFoundException {
+    public Today search(String id) throws SQLException{
         return null;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return false;
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         return null;
     }
 }

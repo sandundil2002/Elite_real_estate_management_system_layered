@@ -10,12 +10,12 @@ import java.util.List;
 
 public class SalaryDAOImpl implements SalaryDAO {
     @Override
-    public List<Salary> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Salary> loadAll() throws SQLException{
         return null;
     }
 
     @Override
-    public boolean save(Salary dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Salary dto) throws SQLException{
         return SQLUtil.sql("insert into salary values(?,?,?,?)",
                 dto.getSalary_id(),
                 dto.getEmployee_id(),
@@ -24,22 +24,22 @@ public class SalaryDAOImpl implements SalaryDAO {
     }
 
     @Override
-    public boolean update(Salary dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Salary dto) throws SQLException{
         return false;
     }
 
     @Override
-    public Salary search(String id) throws SQLException, ClassNotFoundException {
+    public Salary search(String id) throws SQLException{
         return null;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return false;
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("select salary_id from salary order by salary_id desc limit 1");
         if (resultSet.next()){
             String id = resultSet.getString("salary_id");

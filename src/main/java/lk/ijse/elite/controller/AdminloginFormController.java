@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
 
@@ -17,8 +18,8 @@ public class AdminloginFormController {
     public TextField txtPassword;
     public AnchorPane adminPane;
     public TextField txtAdminid;
-    AdminBO adminBO = new AdminBOImpl();
-    DashboardFormController dashboardBO = new DashboardFormController();
+    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
+    DashboardFormController dashboardBO = (DashboardFormController) BOFactory.getInstance().getBO(BOFactory.BOTypes.DASHBOARD);
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String adminid = txtAdminid.getText();

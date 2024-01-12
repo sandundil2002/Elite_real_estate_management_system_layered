@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.CustomerBO;
 import lk.ijse.elite.bo.custom.ScheduleBO;
 import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
@@ -23,8 +24,8 @@ public class CustomerManageFormController {
     public TextField txtEmail;
     public TextField txtName;
     public JFXComboBox cmbSheduleid;
-    CustomerBO customerBO = new CustomerBOImpl();
-    ScheduleBO scheduleBO = new ScheduleBOImpl();
+    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
 
     public void initialize(){
         try {

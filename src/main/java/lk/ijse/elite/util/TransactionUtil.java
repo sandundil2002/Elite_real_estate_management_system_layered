@@ -15,7 +15,7 @@ public class TransactionUtil {
         }
     }
 
-    public TransactionUtil() throws SQLException, ClassNotFoundException {
+    public TransactionUtil() throws SQLException{
     }
 
     public static void startTransaction() throws SQLException {

@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.MaintainBO;
 import lk.ijse.elite.bo.custom.RentingBO;
 import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
@@ -21,8 +22,8 @@ public class MaintainmanageFormController {
     public TextField txtMaintainId;
     public TextField txtStatus;
     public JFXComboBox cmbRentId;
-    MaintainBO maintainBO = new MaintainBOImpl();
-    RentingBO rentingBO = new RentingBOImpl();
+    MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
+    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
 
     public void initialize(){
         try {

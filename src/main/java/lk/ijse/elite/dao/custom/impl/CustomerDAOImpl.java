@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
     @Override
-    public List<Customer> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Customer> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM customer");
         List<Customer> customerList = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public boolean save(Customer dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Customer dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO customer VALUES (?,?,?,?,?,?)",
                 dto.getCustomer_id(),
                 dto.getShedule_id(),
@@ -40,7 +40,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public boolean update(Customer dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Customer dto) throws SQLException{
         return SQLUtil.sql("UPDATE customer SET Shedule_id=?, Name=?, Address=?, Mobile=?, Email=? WHERE Customer_id=?",
                 dto.getShedule_id(),
                 dto.getName(),
@@ -51,7 +51,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer search(String id) throws SQLException, ClassNotFoundException {
+    public Customer search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM customer WHERE Customer_id=?", id);
         if (resultSet.next()) {
             return new Customer(
@@ -67,12 +67,12 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM customer WHERE Customer_id=?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Customer_id FROM customer ORDER BY Customer_id DESC LIMIT 1");
         if (resultSet.next()) {
             String id = resultSet.getString("Customer_id");

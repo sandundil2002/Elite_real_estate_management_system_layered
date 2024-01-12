@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AgentBO;
 import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.dto.AgentDTO;
@@ -26,7 +27,7 @@ public class AgentFormController {
     public TableColumn colMobile;
     public TableColumn colEmail;
     public TableView tblAgent;
-    AgentBO agentBO = new AgentBOImpl();
+    AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
 
     public void initialize() throws SQLException {
         setCellValueFactory();

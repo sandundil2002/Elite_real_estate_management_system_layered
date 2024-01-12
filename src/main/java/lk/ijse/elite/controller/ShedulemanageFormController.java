@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.ScheduleBO;
 import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.dto.ScheduleDTO;
@@ -43,7 +44,7 @@ public class ShedulemanageFormController {
 
     @FXML
     private TableView<SheduleTM> tblShedule;
-    ScheduleBO scheduleBO = new ScheduleBOImpl();
+    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
 
     public void initialize(){
         try {

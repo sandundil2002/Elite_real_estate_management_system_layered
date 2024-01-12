@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.*;
 import lk.ijse.elite.bo.custom.impl.*;
 import lk.ijse.elite.db.DbConnection;
@@ -26,10 +27,10 @@ public class PlaceorderFromController {
     public DatePicker txtDate;
     public TextField txtPaymentid;
     public ChoiceBox cmdPaymethod;
-    CustomerBO customerBO = new CustomerBOImpl();
-    PaymentBO paymentBO = new PaymentBOImpl();
-    SellOrderBO sellOrderBO = new SellOrderBOImpl();
-    PropertyBO propertyBO = new PropertyBOImpl();
+    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+    SellOrderBO sellOrderBO = (SellOrderBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SELLORDER);
+    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
     public void initialize(){
         try {

@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.CustomerBO;
 import lk.ijse.elite.bo.custom.impl.CustomerBOImpl;
 import lk.ijse.elite.dto.CustomerDTO;
@@ -30,7 +31,7 @@ public class CustomerFormController {
     public TableColumn colEmail;
     public TableView tblCustomer;
     public TableColumn colSheduleid;
-    CustomerBO customerBO = new CustomerBOImpl();
+    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
 
     public void initialize(){
         setCellValueFactory();

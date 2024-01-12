@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PropertyDAOImpl implements PropertyDAO {
     @Override
-    public List<Property> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Property> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM property");
         List<Property> proList = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class PropertyDAOImpl implements PropertyDAO {
     }
 
     @Override
-    public boolean save(Property dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Property dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO property VALUES (?,?,?,?,?,?,?)",
                 dto.getPropertyId(),
                 dto.getAgentId(),
@@ -42,7 +42,7 @@ public class PropertyDAOImpl implements PropertyDAO {
     }
 
     @Override
-    public boolean update(Property dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Property dto) throws SQLException{
         return SQLUtil.sql("UPDATE property SET Agent_id = ?, Price = ?, Address = ?, Type = ?, Perches = ?, Status = ? WHERE Property_id = ?",
                 dto.getAgentId(),
                 dto.getPrice(),
@@ -54,7 +54,7 @@ public class PropertyDAOImpl implements PropertyDAO {
     }
 
     @Override
-    public Property search(String id) throws SQLException, ClassNotFoundException {
+    public Property search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM property WHERE Property_id = ?", id);
 
         if (resultSet.next()){
@@ -71,12 +71,12 @@ public class PropertyDAOImpl implements PropertyDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM property WHERE Property_id = ?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Property_id FROM property ORDER BY Property_id DESC LIMIT 1");
         if(resultSet.next()){
             String id = resultSet.getString("Property_id");
@@ -89,6 +89,6 @@ public class PropertyDAOImpl implements PropertyDAO {
     }
 
     @Override
-    public boolean updatePropertyStatus(String id) throws SQLException, ClassNotFoundException {
+    public boolean updatePropertyStatus(String id) throws SQLException{
         return SQLUtil.sql("UPDATE property SET Status=? WHERE property_id=?", "Not Available", id);    }
 }

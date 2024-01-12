@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ScheduleDAOImpl implements ScheduleDAO {
     @Override
-    public List<Schedule> loadAll() throws SQLException, ClassNotFoundException {
+    public List<Schedule> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM schedule");
         List<Schedule> ScheduleList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public boolean save(Schedule dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Schedule dto) throws SQLException{
         return SQLUtil.sql("INSERT INTO schedule VALUES(?,?,?,?,?)",
                 dto.getScheduleId(),
                 dto.getAdminId(),
@@ -39,7 +39,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public boolean update(Schedule dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Schedule dto) throws SQLException{
         return SQLUtil.sql("UPDATE schedule SET Admin_id=?, Date=?, Time=?, Status=? WHERE Shedule_id=?",
                 dto.getAdminId(),
                 dto.getDate(),
@@ -49,7 +49,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public Schedule search(String id) throws SQLException, ClassNotFoundException {
+    public Schedule search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM schedule WHERE Shedule_id=?", id);
 
         if (resultSet.next()) {
@@ -64,12 +64,12 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException{
         return SQLUtil.sql("DELETE FROM schedule WHERE Shedule_id=?", id);
     }
 
     @Override
-    public String generateId() throws SQLException, ClassNotFoundException {
+    public String generateId() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT Shedule_id FROM schedule ORDER BY Shedule_id DESC LIMIT 1");
         if (resultSet.next()) {
             String id = resultSet.getString("Shedule_id");
@@ -82,12 +82,12 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     }
 
     @Override
-    public boolean updateScheduleCompleted(String id) throws SQLException, ClassNotFoundException {
+    public boolean updateScheduleCompleted(String id) throws SQLException{
         return SQLUtil.sql("UPDATE schedule SET Status = ? WHERE Shedule_id = ?", "Completed", id);
     }
 
     @Override
-    public boolean updateScheduleCansel(String id) throws SQLException, ClassNotFoundException {
+    public boolean updateScheduleCansel(String id) throws SQLException{
         return SQLUtil.sql("UPDATE schedule SET Status = ? WHERE Shedule_id = ?", "Cansel", id);
     }
 }

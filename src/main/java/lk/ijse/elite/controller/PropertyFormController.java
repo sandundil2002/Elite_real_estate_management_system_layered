@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.PropertyBO;
 import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.db.DbConnection;
@@ -40,7 +41,7 @@ public class PropertyFormController {
     public TableColumn colStatus;
     public TableColumn colRemove;
     public TableColumn colPerches;
-    PropertyBO propertyBO = new PropertyBOImpl();
+    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
     public void initialize() {
         setCellValueFactory();
