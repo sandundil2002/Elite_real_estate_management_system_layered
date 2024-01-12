@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RentingDAOImpl implements RentingDAO {
-    PropertyBO propertyBO = new PropertyBOImpl();
     @Override
     public List<Rent> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM renting");
@@ -70,36 +69,5 @@ public class RentingDAOImpl implements RentingDAO {
         } else {
             return "R001";
         }
-    }
-
-    @Override
-    public boolean isUpdated(Rent rentDto , RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
-        try {
-            TransactionUtil.startTransaction();
-            boolean isPaymentSaved = new PaymentDAOImpl().save(paymentDto);
-            if(isPaymentSaved){
-                boolean isPaymentDetailSaved = new PaymentDetailDAOImpl().save(paymentdetailDto);
-                if(isPaymentDetailSaved){
-                    boolean isRentSaved = new RentingDAOImpl().save(rentDto);
-                    if(isRentSaved){
-                        boolean isRentDetailSaved = new RentingDetailDAOImpl().save(rentDetailDto);
-                        if(isRentDetailSaved){
-                            boolean isPropertyUpdated = propertyBO.updatePropertyStatus(rentDto.getPropertyId());
-                            if(isPropertyUpdated){
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            TransactionUtil.rollBack();
-            return false;
-        } catch (ClassNotFoundException e) {
-            TransactionUtil.rollBack();
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } finally {
-            TransactionUtil.endTransaction();
-        }
-        return false;
     }
 }

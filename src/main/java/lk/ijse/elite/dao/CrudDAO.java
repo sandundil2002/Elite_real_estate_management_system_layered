@@ -1,6 +1,4 @@
-package lk.ijse.elite.dao.custom;
-
-import lk.ijse.elite.dao.SuperDAO;
+package lk.ijse.elite.dao;
 
 import java.sql.SQLException;
 import java.util.List;

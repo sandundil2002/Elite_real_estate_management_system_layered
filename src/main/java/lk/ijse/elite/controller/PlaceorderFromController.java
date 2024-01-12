@@ -29,7 +29,6 @@ public class PlaceorderFromController {
     public ChoiceBox cmdPaymethod;
     CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
     PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
-    SellOrderBO sellOrderBO = (SellOrderBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SELLORDER);
     PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
     public void initialize(){
@@ -79,7 +78,7 @@ public class PlaceorderFromController {
         PaymentDetail paymentDetail = new PaymentDetail(propertyId,paymentId,method);
 
         try {
-            boolean isSuccess = sellOrderBO.isOrderSuccess(payment,paymentDetail);
+            boolean isSuccess = paymentBO.isSellOrderSuccess(payment,paymentDetail);
             if (isSuccess) {
                 jasperReport();
                 btnClearOnAction();

@@ -22,5 +22,5 @@ public interface RentingBO extends SuperBO {
 
     String generateRentingId() throws SQLException,ClassNotFoundException;
 
-    boolean isUpdated(Rent rentDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException;
+    boolean isRentOrderSuccess(Rent rentDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException;
 }

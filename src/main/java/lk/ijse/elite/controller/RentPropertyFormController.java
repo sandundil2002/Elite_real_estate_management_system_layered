@@ -98,7 +98,7 @@ public class RentPropertyFormController {
         PaymentDetail paymentDetail = new PaymentDetail(propertyId,paymentId,method);
 
         try {
-            boolean isSuccess = rentingBO.isUpdated(rent,rentingDetail,payment,paymentDetail);
+            boolean isSuccess = rentingBO.isRentOrderSuccess(rent,rentingDetail,payment,paymentDetail);
             if (isSuccess){
                 jasperReport();
                 btnRentClearOnAction();

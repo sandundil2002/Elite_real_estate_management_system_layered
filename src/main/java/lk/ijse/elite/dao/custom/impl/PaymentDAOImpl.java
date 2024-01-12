@@ -1,13 +1,8 @@
 package lk.ijse.elite.dao.custom.impl;
 
-import javafx.scene.control.Alert;
-import lk.ijse.elite.bo.custom.PropertyBO;
-import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.dao.custom.PaymentDAO;
 import lk.ijse.elite.entity.Payment;
-import lk.ijse.elite.entity.PaymentDetail;
 import lk.ijse.elite.util.SQLUtil;
-import lk.ijse.elite.util.TransactionUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
-    PropertyBO propertyBO = new PropertyBOImpl();
     @Override
     public List<Payment> loadAll() throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM payment");
@@ -71,30 +65,5 @@ public class PaymentDAOImpl implements PaymentDAO {
         } else {
             return "Pay001";
         }
-    }
-
-    @Override
-    public boolean isPaymentSuccess(Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
-        try{
-            TransactionUtil.startTransaction();
-            boolean isPaymentSaved = save(paymentDto);
-            if(isPaymentSaved){
-                boolean isPaymentDetailSaved = new PaymentDetailDAOImpl().save(paymentdetailDto);
-                if (isPaymentDetailSaved){
-                    boolean isPropertyUpdated = propertyBO.updatePropertyStatus(paymentdetailDto.getProperty_id());
-                    if (isPropertyUpdated){
-                        return true;
-                    }
-                }
-            }
-            TransactionUtil.rollBack();
-            return false;
-        } catch (SQLException | ClassNotFoundException e){
-            TransactionUtil.rollBack();
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } finally {
-            TransactionUtil.endTransaction();
-        }
-        return false;
     }
 }

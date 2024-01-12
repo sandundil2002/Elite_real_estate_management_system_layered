@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
-import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ public class AdminloginFormController {
     public AnchorPane adminPane;
     public TextField txtAdminid;
     AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
-    DashboardFormController dashboardBO = (DashboardFormController) BOFactory.getInstance().getBO(BOFactory.BOTypes.DASHBOARD);
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String adminid = txtAdminid.getText();
@@ -42,7 +40,7 @@ public class AdminloginFormController {
             stage.setScene(scene);
             stage.setTitle("Dashboard Form");
             stage.centerOnScreen();
-            dashboardBO.Animation(anchorPane);
+            DashboardFormController.Animation(anchorPane);
         }
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -56,7 +54,7 @@ public class AdminloginFormController {
         stage.setScene(scene);
         stage.setTitle("Admin Register Form");
         stage.centerOnScreen();
-        dashboardBO.Animation(anchorPane);
+        DashboardFormController.Animation(anchorPane);
     }
 }
 

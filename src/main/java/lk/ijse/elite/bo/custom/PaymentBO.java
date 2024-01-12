@@ -2,6 +2,8 @@ package lk.ijse.elite.bo.custom;
 
 import lk.ijse.elite.bo.SuperBO;
 import lk.ijse.elite.dto.PaymentDTO;
+import lk.ijse.elite.entity.Payment;
+import lk.ijse.elite.entity.PaymentDetail;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,5 +21,5 @@ public interface PaymentBO extends SuperBO {
     boolean deletePayment(String id) throws SQLException,ClassNotFoundException;
 
     String generatePaymentId() throws SQLException,ClassNotFoundException;
-
+    boolean isSellOrderSuccess(Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException;
 }

@@ -105,7 +105,7 @@ public class AdminRegisterFormController {
         stage.setScene(scene);
         stage.setTitle("Admin Login Form");
         stage.centerOnScreen();
-        //dashboardBO.Animation(anchorPane);
+        DashboardFormController.Animation(anchorPane);
     }
 
     private boolean validateAdmin() {
