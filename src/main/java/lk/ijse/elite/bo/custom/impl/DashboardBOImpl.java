@@ -3,6 +3,8 @@ package lk.ijse.elite.bo.custom.impl;
 import lk.ijse.elite.bo.custom.DashboardBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.DashboardDAO;
+import lk.ijse.elite.dto.CustomerDTO;
+import lk.ijse.elite.entity.Customer;
 import lk.ijse.elite.entity.Today;
 import lk.ijse.elite.dto.TodayAppoinmentsDTO;
 
@@ -24,15 +26,15 @@ public class DashboardBOImpl implements DashboardBO {
 
     @Override
     public List<TodayAppoinmentsDTO> loadTodayShedules() throws SQLException, ClassNotFoundException {
-        List<Today> todays = dashboardDAO.loadAll();
+        List<Today> loadAll = dashboardDAO.loadAll();
         List<TodayAppoinmentsDTO> todayAppoinmentsDTOS = new ArrayList<>();
 
-        for (Today today : todays){
+        for (Today today : loadAll){
             todayAppoinmentsDTOS.add(new TodayAppoinmentsDTO(
                     today.getShedule_id(),
                     today.getName(),
-                    today.getMobile(),
-                    today.getTime()));
+                    today.getTime(),
+                    today.getMobile()));
         }
         return todayAppoinmentsDTOS;
     }

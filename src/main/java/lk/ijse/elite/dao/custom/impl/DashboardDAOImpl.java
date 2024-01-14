@@ -1,6 +1,7 @@
 package lk.ijse.elite.dao.custom.impl;
 
 import lk.ijse.elite.dao.custom.DashboardDAO;
+import lk.ijse.elite.dto.TodayAppoinmentsDTO;
 import lk.ijse.elite.entity.Today;
 import lk.ijse.elite.util.SQLUtil;
 
@@ -37,6 +38,23 @@ public class DashboardDAOImpl implements DashboardDAO {
         ResultSet resultSet = SQLUtil.sql("SELECT COUNT(*) FROM property");
         return resultSet.next() ? resultSet.getInt(1) : 0;
     }
+
+    @Override
+    public List<Today> loadTodayShedules() throws SQLException{
+        ResultSet resultSet = SQLUtil.sql("SELECT schedule.Shedule_id,customer.Name,Schedule.Time,customer.Mobile FROM customer JOIN Schedule ON customer.Shedule_id = Schedule.Shedule_id WHERE Schedule.Date = CURDATE() ORDER BY Schedule.Shedule_id ASC");
+        List<Today> TodayAppoinmentsList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            TodayAppoinmentsList.add(new Today(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            ));
+        }
+        return TodayAppoinmentsList;
+    }
+
     @Override
     public boolean save(Today dto) throws SQLException{
         return false;

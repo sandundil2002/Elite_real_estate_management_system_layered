@@ -92,8 +92,8 @@ public class PaymentBOImpl implements PaymentBO {
                 if (isPaymentDetailSaved) {
                     boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(paymentdetailDto.getProperty_id());
                     if (isPropertyUpdated) {
-                        result = true;
                         TransactionUtil.endTransaction();
+                        result = true;
                     }
                 }
             } else {

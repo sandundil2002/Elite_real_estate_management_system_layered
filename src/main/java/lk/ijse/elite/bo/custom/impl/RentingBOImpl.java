@@ -94,8 +94,8 @@ public class RentingBOImpl implements RentingBO {
                         if(isRentDetailSaved){
                             boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(rentingDto.getPropertyId());
                             if(isPropertyUpdated){
-                                result = true;
                                 TransactionUtil.endTransaction();
+                                result = true;
                             }
                         }
                     }
