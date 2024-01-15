@@ -84,4 +84,9 @@ public class PropertyBOImpl implements PropertyBO {
     public boolean updatePropertyStatus(String id) throws SQLException, ClassNotFoundException {
         return propertyDAO.updatePropertyStatus(id);
     }
+
+    @Override
+    public boolean isPropertyAvailable(String id) throws SQLException, ClassNotFoundException {
+        return propertyDAO.isPropertyAvailable(id);
+    }
 }

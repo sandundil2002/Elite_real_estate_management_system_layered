@@ -1,5 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
+import javafx.scene.control.Alert;
 import lk.ijse.elite.bo.custom.PaymentBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.PaymentDAO;
@@ -85,20 +86,25 @@ public class PaymentBOImpl implements PaymentBO {
     public boolean isSellOrderSuccess(Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
         boolean result = false;
         try {
-            TransactionUtil.startTransaction();
-            boolean isPaymentSaved = paymentDAO.save(paymentDto);
-            if (isPaymentSaved) {
-                boolean isPaymentDetailSaved = paymentDetailDAO.save(paymentdetailDto);
-                if (isPaymentDetailSaved) {
-                    boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(paymentdetailDto.getProperty_id());
-                    if (isPropertyUpdated) {
-                        TransactionUtil.endTransaction();
-                        result = true;
-                    }
-                }
-            } else {
-                TransactionUtil.rollBack();
+            boolean isPropertyAvailable = propertyDAO.isPropertyAvailable(paymentdetailDto.getProperty_id());
+            if(!isPropertyAvailable) {
+                new Alert(Alert.AlertType.ERROR, "Property is not available").show();
+                return false;
             }
+                TransactionUtil.startTransaction();
+                boolean isPaymentSaved = paymentDAO.save(paymentDto);
+                if (isPaymentSaved) {
+                    boolean isPaymentDetailSaved = paymentDetailDAO.save(paymentdetailDto);
+                    if (isPaymentDetailSaved) {
+                        boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(paymentdetailDto.getProperty_id());
+                        if (isPropertyUpdated) {
+                            TransactionUtil.endTransaction();
+                            result = true;
+                        }
+                    }
+                } else {
+                    TransactionUtil.rollBack();
+                }
         } catch (SQLException | ClassNotFoundException e) {
             TransactionUtil.rollBack();
             e.printStackTrace();

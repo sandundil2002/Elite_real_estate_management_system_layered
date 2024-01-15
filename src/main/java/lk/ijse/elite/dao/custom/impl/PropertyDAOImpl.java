@@ -91,4 +91,10 @@ public class PropertyDAOImpl implements PropertyDAO {
     @Override
     public boolean updatePropertyStatus(String id) throws SQLException{
         return SQLUtil.sql("UPDATE property SET Status=? WHERE property_id=?", "Not Available", id);    }
+
+    @Override
+    public boolean isPropertyAvailable(String id) throws SQLException{
+        ResultSet resultSet = SQLUtil.sql("SELECT * FROM property WHERE Property_id = ? AND Status = ?", id, "Available");
+        return resultSet.next();
+    }
 }

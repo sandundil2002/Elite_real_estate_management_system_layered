@@ -7,4 +7,5 @@ import java.sql.SQLException;
 
 public interface PropertyDAO extends CrudDAO<Property> {
     boolean updatePropertyStatus(String id) throws SQLException, ClassNotFoundException;
+    boolean isPropertyAvailable(String id) throws SQLException, ClassNotFoundException;
 }

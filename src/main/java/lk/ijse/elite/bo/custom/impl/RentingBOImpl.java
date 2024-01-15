@@ -1,5 +1,6 @@
 package lk.ijse.elite.bo.custom.impl;
 
+import javafx.scene.control.Alert;
 import lk.ijse.elite.bo.custom.RentingBO;
 import lk.ijse.elite.dao.DAOFactory;
 import lk.ijse.elite.dao.custom.*;
@@ -83,24 +84,29 @@ public class RentingBOImpl implements RentingBO {
     public boolean isRentOrderSuccess(Rent rentingDto, RentingDetail rentDetailDto, Payment paymentDto, PaymentDetail paymentdetailDto) throws SQLException {
         boolean result = false;
         try {
-            TransactionUtil.startTransaction();
-            boolean isPaymentSaved = paymentDAO.save(paymentDto);
-            if(isPaymentSaved){
-                boolean isPaymentDetailSaved = paymentDetailDAO.save(paymentdetailDto);
-                if(isPaymentDetailSaved){
-                    boolean isRentSaved = rentingDAO.save(rentingDto);
-                    if(isRentSaved){
-                        boolean isRentDetailSaved = rentingDetailDAO.save(rentDetailDto);
-                        if(isRentDetailSaved){
-                            boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(rentingDto.getPropertyId());
-                            if(isPropertyUpdated){
-                                TransactionUtil.endTransaction();
-                                result = true;
+            boolean isPropertyAvailable = propertyDAO.isPropertyAvailable(paymentdetailDto.getProperty_id());
+            if(!isPropertyAvailable) {
+                new Alert(Alert.AlertType.ERROR, "Property is not available").show();
+                return false;
+            }
+                TransactionUtil.startTransaction();
+                boolean isPaymentSaved = paymentDAO.save(paymentDto);
+                if (isPaymentSaved) {
+                    boolean isPaymentDetailSaved = paymentDetailDAO.save(paymentdetailDto);
+                    if (isPaymentDetailSaved) {
+                        boolean isRentSaved = rentingDAO.save(rentingDto);
+                        if (isRentSaved) {
+                            boolean isRentDetailSaved = rentingDetailDAO.save(rentDetailDto);
+                            if (isRentDetailSaved) {
+                                boolean isPropertyUpdated = propertyDAO.updatePropertyStatus(rentingDto.getPropertyId());
+                                if (isPropertyUpdated) {
+                                    TransactionUtil.endTransaction();
+                                    result = true;
+                                }
                             }
                         }
                     }
-                }
-            }else {
+                } else {
                 TransactionUtil.rollBack();
             }
         } catch (SQLException | ClassNotFoundException e) {

@@ -21,4 +21,5 @@ public interface PropertyBO extends SuperBO {
     String generatePropertyId() throws SQLException,ClassNotFoundException;
 
     boolean updatePropertyStatus(String id) throws SQLException, ClassNotFoundException;
+    boolean isPropertyAvailable(String id) throws SQLException, ClassNotFoundException;
 }
