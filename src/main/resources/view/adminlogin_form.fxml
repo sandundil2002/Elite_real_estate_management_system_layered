@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="liner-background" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.elite.controller.AdminloginFormController">
+<AnchorPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="liner-background" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.elite.controller.AdminLoginFormController">
    <children>
       <Pane layoutX="40.0" layoutY="41.0" prefHeight="649.0" prefWidth="1206.0" style="-fx-background-color: white; -fx-background-radius: 50;">
          <children>
@@ -27,7 +27,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="20.0" layoutY="393.0" prefHeight="32.0" prefWidth="337.0" promptText="Password" styleClass="lablebtn">
+            <TextField fx:id="txtPassword" layoutX="20.0" layoutY="393.0" onAction="#btnLoginOnAction" prefHeight="32.0" prefWidth="337.0" promptText="Password" styleClass="lablebtn">
                <font>
                   <Font size="20.0" />
                </font>

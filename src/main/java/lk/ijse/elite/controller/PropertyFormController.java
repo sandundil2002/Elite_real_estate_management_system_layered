@@ -2,7 +2,6 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -10,11 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.PropertyBO;
-import lk.ijse.elite.bo.custom.impl.PropertyBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.dto.PropertyDTO;
 import lk.ijse.elite.dto.tm.PropertyTM;
@@ -30,18 +27,35 @@ import java.util.List;
 import java.util.Optional;
 
 public class PropertyFormController {
-    public TableView<PropertyTM> tblproperty;
 
-    public AnchorPane property;
-    public TableColumn colPropertyid;
-    public TableColumn colAgentid;
-    public TableColumn colType;
-    public TableColumn colAddress;
-    public TableColumn colPrice;
-    public TableColumn colStatus;
-    public TableColumn colRemove;
-    public TableColumn colPerches;
-    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
+    @FXML
+    private TableView<PropertyTM> tblproperty;
+
+    @FXML
+    private TableColumn colPropertyid;
+
+    @FXML
+    private TableColumn colAgentid;
+
+    @FXML
+    private TableColumn colType;
+
+    @FXML
+    private TableColumn colAddress;
+
+    @FXML
+    private TableColumn colPrice;
+
+    @FXML
+    private TableColumn colStatus;
+
+    @FXML
+    private TableColumn colRemove;
+
+    @FXML
+    private TableColumn colPerches;
+
+    private final PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
     public void initialize() {
         setCellValueFactory();
@@ -58,7 +72,8 @@ public class PropertyFormController {
         colRemove.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
     }
 
-    public void btnPropertymanageOnAction(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void btnPropertymanageOnAction(){
         try {
             URL resource = PropertymanageFormcCntroller.class.getResource("/view/propertymanage_form.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -71,8 +86,9 @@ public class PropertyFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
     @FXML
-    public void btnBuypropertyOnAction(ActionEvent event) {
+    private void btnBuypropertyOnAction() {
         try {
             URL resource = PlaceorderFromController.class.getResource("/view/placeorder_from.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -85,6 +101,7 @@ public class PropertyFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
     private void loadAllProperty() {
         ObservableList<PropertyTM> obList = FXCollections.observableArrayList();
 
@@ -131,7 +148,8 @@ public class PropertyFormController {
         }
     }
 
-    public void btnPrintOnAction() throws JRException, SQLException {
+    @FXML
+    private void btnPrintOnAction() throws JRException, SQLException {
         InputStream resourceAsStream = getClass().getResourceAsStream("/reports/property.jrxml");
         JasperDesign load = JRXmlLoader.load(resourceAsStream);
         JasperReport compileReport = JasperCompileManager.compileReport(load);
@@ -144,11 +162,13 @@ public class PropertyFormController {
         JasperViewer.viewReport(jasperPrint, false);
     }
 
-    public void btnRefeshOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRefeshOnAction() {
         initialize();
     }
 
-    public void btnRentpropertyOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRentpropertyOnAction() {
         try {
             URL resource = RentPropertyFormController.class.getResource("/view/rentProperty_form.fxml");
             Parent parent = FXMLLoader.load(resource);

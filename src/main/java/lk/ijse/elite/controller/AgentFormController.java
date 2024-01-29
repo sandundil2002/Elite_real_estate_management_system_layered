@@ -2,16 +2,14 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AgentBO;
-import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.dto.AgentDTO;
 import lk.ijse.elite.dto.tm.AgentTM;
 import java.io.IOException;
@@ -20,21 +18,34 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AgentFormController {
-    public AnchorPane agent;
-    public TableColumn colAgentid;
-    public TableColumn colName;
-    public TableColumn colAddress;
-    public TableColumn colMobile;
-    public TableColumn colEmail;
-    public TableView tblAgent;
-    AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
+
+    @FXML
+    private TableColumn colAgentid;
+
+    @FXML
+    private TableColumn colName;
+
+    @FXML
+    private TableColumn colAddress;
+
+    @FXML
+    private TableColumn colMobile;
+
+    @FXML
+    private TableColumn colEmail;
+
+    @FXML
+    private TableView tblAgent;
+
+    private final AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
 
     public void initialize() throws SQLException {
         setCellValueFactory();
         loadAllAgents();
     }
 
-    public void btnAgentmanageOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnAgentmanageOnAction() {
         try {
             URL resource = AgentFormController.class.getResource("/view/agentsManageForm.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -77,7 +88,8 @@ public class AgentFormController {
         }
     }
 
-    public void btnBuyOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnBuyOnAction() {
         try {
             URL resource = PropertymanageFormcCntroller.class.getResource("/view/propertymanage_form.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -92,7 +104,8 @@ public class AgentFormController {
         }
     }
 
-    public void btnRefeshOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRefeshOnAction() {
         try {
             initialize();
         } catch (SQLException e) {

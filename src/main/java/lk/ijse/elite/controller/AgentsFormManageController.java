@@ -1,22 +1,32 @@
 package lk.ijse.elite.controller;
 
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AgentBO;
-import lk.ijse.elite.bo.custom.impl.AgentBOImpl;
 import lk.ijse.elite.dto.AgentDTO;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class AgentsFormManageController {
-    public TextField txtAgentid;
-    public TextField txtName;
-    public TextField txtAddress;
-    public TextField txtMobile;
-    public TextField txtEmail;
-    AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
+
+    @FXML
+    private TextField txtAgentid;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private TextField txtAddress;
+
+    @FXML
+    private TextField txtMobile;
+
+    @FXML
+    private TextField txtEmail;
+
+    private final AgentBO agentBO = (AgentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.AGENT);
 
     public void initialize() {
         try {
@@ -26,7 +36,8 @@ public class AgentsFormManageController {
         }
     }
 
-    public void btnSaveOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSaveOnAction() {
         String agentid = txtAgentid.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
@@ -60,7 +71,8 @@ public class AgentsFormManageController {
         txtEmail.setText("");
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnUpdateOnAction() {
         String agentid = txtAgentid.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
@@ -85,7 +97,8 @@ public class AgentsFormManageController {
         }
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnDeleteOnAction() {
         String agentid = txtAgentid.getText();
 
         try {

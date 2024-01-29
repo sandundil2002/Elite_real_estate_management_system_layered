@@ -1,6 +1,7 @@
 package lk.ijse.elite.entity;
 
 import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

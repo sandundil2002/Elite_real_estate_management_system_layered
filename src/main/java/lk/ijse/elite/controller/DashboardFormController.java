@@ -1,6 +1,5 @@
 package lk.ijse.elite.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,16 +11,19 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class DashboardFormController {
+
     @FXML
     private Pane bodyPane;
-    public AnchorPane dashboard;
-    private AnchorPane anchorPane;
+
+    @FXML
+    private AnchorPane dashboard;
 
     public void initialize() throws IOException {
-        btnDashboardOnAction(new ActionEvent());
+        btnDashboardOnAction();
     }
 
-    public void btnPropertyOnAction(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void btnPropertyOnAction(){
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PropertyForm.fxml"));
@@ -32,7 +34,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnEmployeeOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnEmployeeOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/EmployeeForm.fxml"));
@@ -42,8 +45,9 @@ public class DashboardFormController {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void btnSignoutOnAction(ActionEvent actionEvent) throws IOException {
+
+    @FXML
+    private void btnSignoutOnAction() throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/adminlogin_form.fxml"));
         Scene scene = new Scene(anchorPane);
         Stage stage = (Stage) dashboard.getScene().getWindow();
@@ -53,7 +57,8 @@ public class DashboardFormController {
         Animation(anchorPane);
     }
 
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnDashboardOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/mainDashboardForm.fxml"));
@@ -64,7 +69,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnAppoinmentsOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnAppoinmentsOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/shedule_form.fxml"));
@@ -75,7 +81,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnCustomersOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnCustomersOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/customerForm.fxml"));
@@ -86,7 +93,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnPaymentsOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnPaymentsOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PaymentsForm.fxml"));
@@ -97,7 +105,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnRentalOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRentalOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/RentalForm.fxml"));
@@ -108,7 +117,8 @@ public class DashboardFormController {
         }
     }
 
-    public void btnAgentsOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnAgentsOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/AgentForm.fxml"));
@@ -119,6 +129,7 @@ public class DashboardFormController {
         }
     }
 
+    @FXML
     public static void Animation(AnchorPane anchorPane){
         TranslateTransition transition = new TranslateTransition(Duration.millis(350), anchorPane);
         transition.setFromX(-anchorPane.getPrefWidth());

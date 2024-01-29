@@ -2,6 +2,7 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -12,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.DashboardBO;
-import lk.ijse.elite.bo.custom.impl.DashboardBOImpl;
 import lk.ijse.elite.dto.TodayAppoinmentsDTO;
 import lk.ijse.elite.dto.tm.TodayAppointmentsTM;
 import lk.ijse.elite.util.SQLUtil;
@@ -24,17 +24,38 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainDashboardFormController {
-    public Label lblTime;
-    public Label lblDate;
-    public TableColumn colSheduleid;
-    public TableColumn colCusname;
-    public TableColumn colTime;
-    public TableColumn colMobile;
-    public TableView tblTodayAppointment;
-    public Label lblTotalPro;
-    public Label lblTotalApp;
-    public BarChart<String, Number> barChart;
-    DashboardBO dashboardBO = (DashboardBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.DASHBOARD);
+
+    @FXML
+    private Label lblTime;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private TableColumn colSheduleid;
+
+    @FXML
+    private TableColumn colCusname;
+
+    @FXML
+    private TableColumn colTime;
+
+    @FXML
+    private TableColumn colMobile;
+
+    @FXML
+    private TableView tblTodayAppointment;
+
+    @FXML
+    private Label lblTotalPro;
+
+    @FXML
+    private Label lblTotalApp;
+
+    @FXML
+    private BarChart<String, Number> barChart;
+
+    private final DashboardBO dashboardBO = (DashboardBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.DASHBOARD);
 
     public void initialize() {
         loadTodayShedules();

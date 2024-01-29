@@ -1,6 +1,7 @@
 package lk.ijse.elite.dto;
 
 import lombok.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

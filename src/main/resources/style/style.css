@@ -8,15 +8,18 @@
     -fx-background-color: #fff6f6;
     -fx-opacity: 100;
 }
+
 .mainfont{
     -fx-font-family: 'Poppins', sans-serif;
 }
+
 .loginbtn{
     -fx-background-radius: 50;
     -fx-border-radius: 50;
     -fx-background-color: #f8e0c8;
     -fx-text-fill: #000000;
 }
+
 .sidePane{
     -fx-background-radius: 0,30, 30 ,0;
     -fx-border-radius: 0,30, 30 ,0;
@@ -35,6 +38,7 @@
     -fx-border-color: #000000;
     -fx-text-fill: #464646;
 }
+
 .lablebtn{
     -fx-border-color: #000000;
     -fx-border-radius: 50;

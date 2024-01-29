@@ -3,14 +3,12 @@ package lk.ijse.elite.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.EmployeeBO;
-import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
-import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.dto.AdminDTO;
 import lk.ijse.elite.dto.EmployeeDTO;
 import java.sql.SQLException;
@@ -18,15 +16,31 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class EmployeeManageformController {
-    public TextField txtEmpid;
-    public TextField txtName;
-    public TextField txtAddress;
-    public TextField txtMobile;
-    public JFXComboBox cmbAdminid;
-    public JFXComboBox cmbEmployeeposition;
-    public TextField txtAmount;
-    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
-    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
+
+    @FXML
+    private TextField txtEmpid;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private TextField txtAddress;
+
+    @FXML
+    private TextField txtMobile;
+
+    @FXML
+    private JFXComboBox cmbAdminid;
+
+    @FXML
+    private JFXComboBox cmbEmployeeposition;
+
+    @FXML
+    private TextField txtAmount;
+
+    private final EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
+
+    public final AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
 
     public void initialize(){
         try {
@@ -72,7 +86,8 @@ public class EmployeeManageformController {
         }
     }
 
-    public void btnSaveOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSaveOnAction() {
         String eid = txtEmpid.getText();
         String adid = String.valueOf(cmbAdminid.getValue());
         String name = txtName.getText();
@@ -107,7 +122,8 @@ public class EmployeeManageformController {
         txtMobile.setText("");
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnUpdateOnAction() {
         String eid = txtEmpid.getText();
         String adid = String.valueOf(cmbAdminid.getValue());
         String name = txtName.getText();
@@ -134,7 +150,8 @@ public class EmployeeManageformController {
         }
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    @FXML
+    public void btnDeleteOnAction() {
         String eid = txtEmpid.getText();
 
         try{
@@ -154,7 +171,8 @@ public class EmployeeManageformController {
         }
     }
 
-    public void btnSearchOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSearchOnAction() {
         String eid = txtEmpid.getText();
 
         try {

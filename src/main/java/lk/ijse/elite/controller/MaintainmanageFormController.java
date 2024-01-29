@@ -3,27 +3,34 @@ package lk.ijse.elite.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.MaintainBO;
 import lk.ijse.elite.bo.custom.RentingBO;
-import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
-import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
 import lk.ijse.elite.dto.MaintainDTO;
 import lk.ijse.elite.dto.RentingDTO;
 import java.sql.SQLException;
 import java.util.List;
 
 public class MaintainmanageFormController {
-    public DatePicker dtpDate;
-    public TextField txtMaintainId;
-    public TextField txtStatus;
-    public JFXComboBox cmbRentId;
-    MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
-    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
+
+    @FXML
+    private DatePicker dtpDate;
+
+    @FXML
+    private TextField txtMaintainId;
+
+    @FXML
+    private TextField txtStatus;
+
+    @FXML
+    private JFXComboBox cmbRentId;
+
+    private final MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
+    public final RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
 
     public void initialize(){
         try {
@@ -35,7 +42,8 @@ public class MaintainmanageFormController {
         dtpDate.setValue(java.time.LocalDate.now());
     }
 
-    public void btnSaveOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSaveOnAction() {
         String maintainId = txtMaintainId.getText();
         String rentId = String.valueOf(cmbRentId.getValue());
         String date = String.valueOf(dtpDate.getValue());

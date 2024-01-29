@@ -2,7 +2,6 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -15,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.ScheduleBO;
-import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.dto.ScheduleDTO;
 import lk.ijse.elite.dto.tm.SheduleTM;
 import java.io.IOException;
@@ -25,11 +23,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShedulemanageFormController {
-    public AnchorPane shedule;
-    public Pane bodyPane;
-    public TableColumn colStatus;
-    public TableColumn colComplete;
-    public TableColumn conCansel;
+
+    @FXML
+    private Pane bodyPane;
+
+    @FXML
+    private TableColumn colStatus;
+
+    @FXML
+    private TableColumn colComplete;
+
+    @FXML
+    private TableColumn conCansel;
+
     @FXML
     private TableColumn<?, ?> colAdminId;
 
@@ -44,7 +50,8 @@ public class ShedulemanageFormController {
 
     @FXML
     private TableView<SheduleTM> tblShedule;
-    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
+
+    private final ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
 
     public void initialize(){
         try {
@@ -65,7 +72,8 @@ public class ShedulemanageFormController {
         conCansel.setCellValueFactory(new PropertyValueFactory<>("btnCansel"));
     }
 
-    public void btnShedulemanageOnAction(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void btnShedulemanageOnAction( ){
         try {
             URL resource = SheduleFormController.class.getResource("/view/sheduleManageForm.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -144,11 +152,13 @@ public class ShedulemanageFormController {
         }
     }
 
-    public void btnRefeshOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRefeshOnAction() {
             initialize();
     }
 
-    public void btnCustomerOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnCustomerOnAction() {
         bodyPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/customerForm.fxml"));

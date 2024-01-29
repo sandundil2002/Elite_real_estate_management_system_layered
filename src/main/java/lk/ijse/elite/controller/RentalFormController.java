@@ -2,7 +2,7 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.RentingBO;
-import lk.ijse.elite.bo.custom.impl.RentingBOImpl;
 import lk.ijse.elite.dto.RentingDTO;
 import lk.ijse.elite.dto.tm.RentingTM;
 import java.io.IOException;
@@ -22,23 +21,43 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class RentalFormController {
-    public TableColumn colRentId;
-    public TableColumn colPropertyId;
-    public TableColumn colAgentId;
-    public TableColumn colDate;
-    public TableColumn colDuration;
-    public AnchorPane rentPane;
-    public TableView tblRent;
-    public TableColumn colMaintain;
-    public TableColumn colDelete;
-    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
+
+    @FXML
+    private TableColumn colRentId;
+
+    @FXML
+    private TableColumn colPropertyId;
+
+    @FXML
+    private TableColumn colAgentId;
+
+    @FXML
+    private TableColumn colDate;
+
+    @FXML
+    private TableColumn colDuration;
+
+    @FXML
+    private AnchorPane rentPane;
+
+    @FXML
+    private TableView tblRent;
+
+    @FXML
+    private TableColumn colMaintain;
+
+    @FXML
+    private TableColumn colDelete;
+
+    private final RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
 
     public void initialize() throws SQLException {
         setCellValueFactories();
         loadAllRentals();
     }
 
-    public void btnViewPropertyOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnViewPropertyOnAction() {
         rentPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/PropertyForm.fxml"));
@@ -125,7 +144,8 @@ public class RentalFormController {
         }
     }
 
-    public void btnViewMaintainOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnViewMaintainOnAction() {
         rentPane.getChildren().clear();
         try {
             AnchorPane anchorPane = FXMLLoader.load(this.getClass().getResource("/view/maintain_Form.fxml"));

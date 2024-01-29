@@ -2,11 +2,10 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.*;
-import lk.ijse.elite.bo.custom.impl.*;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.entity.*;
 import lk.ijse.elite.dto.*;
@@ -20,16 +19,33 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PlaceorderFromController {
-    public TextField txtCustomerName;
-    public TextField txtPropertyPrice;
-    public ComboBox comProid;
-    public ComboBox comCusid;
-    public DatePicker txtDate;
-    public TextField txtPaymentid;
-    public ChoiceBox cmdPaymethod;
-    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
-    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
-    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
+
+    @FXML
+    private TextField txtCustomerName;
+
+    @FXML
+    private TextField txtPropertyPrice;
+
+    @FXML
+    private ComboBox comProid;
+
+    @FXML
+    private ComboBox comCusid;
+
+    @FXML
+    private DatePicker txtDate;
+
+    @FXML
+    private TextField txtPaymentid;
+
+    @FXML
+    private ChoiceBox cmdPaymethod;
+
+    private final CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+
+    private final PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+
+    private final PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
     public void initialize(){
         try {
@@ -64,11 +80,11 @@ public class PlaceorderFromController {
         cmdPaymethod.setValue("Cash");
     }
 
-    public void btnBuyOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnBuyOnAction() {
         String paymentId = txtPaymentid.getText();
         String customerId = String.valueOf(comCusid.getValue());
         String propertyId = String.valueOf(comProid.getValue());
-        String name = txtCustomerName.getText();
         String price = txtPropertyPrice.getText();
         String method = String.valueOf(cmdPaymethod.getValue());
         String date = txtDate.getValue().toString();
@@ -89,7 +105,8 @@ public class PlaceorderFromController {
         }
     }
 
-    public void btnClearOnAction() {
+    @FXML
+    private void btnClearOnAction() {
         txtPaymentid.clear();
         txtCustomerName.clear();
         txtPropertyPrice.clear();

@@ -2,14 +2,12 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.MaintainBO;
-import lk.ijse.elite.bo.custom.impl.MaintainBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.dto.MaintainDTO;
 import lk.ijse.elite.dto.tm.MaintainTM;
@@ -23,15 +21,29 @@ import java.util.List;
 import java.util.Optional;
 
 public class MaintainFormController {
-    public AnchorPane maintainPane;
+
+    @FXML
     public TableView tblMaintain;
-    public TableColumn colMaintainid;
-    public TableColumn colRentId;
-    public TableColumn colDate;
-    public TableColumn colStatus;
-    public TableColumn colFinished;
-    public TableColumn colCansel;
-    MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
+
+    @FXML
+    private TableColumn colMaintainid;
+
+    @FXML
+    private TableColumn colRentId;
+
+    @FXML
+    private TableColumn colDate;
+
+    @FXML
+    private TableColumn colStatus;
+
+    @FXML
+    private TableColumn colFinished;
+
+    @FXML
+    private TableColumn colCansel;
+
+    private final MaintainBO maintainBO = (MaintainBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.MAINTAIN);
 
     public void initialize() {
         cellValueFactory();
@@ -46,6 +58,7 @@ public class MaintainFormController {
         colFinished.setCellValueFactory(new PropertyValueFactory<>("btnFinished"));
         colCansel.setCellValueFactory(new PropertyValueFactory<>("btnCansel"));
     }
+
     private void loadAllMaintain() {
         ObservableList<MaintainTM> obList = FXCollections.observableArrayList();
 
@@ -112,7 +125,8 @@ public class MaintainFormController {
             }
         }
 
-    public void btnPrintOnAction(ActionEvent actionEvent) throws JRException, SQLException {
+    @FXML
+    private void btnPrintOnAction() throws JRException, SQLException {
         InputStream resourceAsStream = getClass().getResourceAsStream("/reports/Maintain_details.jrxml");
         JasperDesign load = JRXmlLoader.load(resourceAsStream);
         JasperReport compileReport = JasperCompileManager.compileReport(load);

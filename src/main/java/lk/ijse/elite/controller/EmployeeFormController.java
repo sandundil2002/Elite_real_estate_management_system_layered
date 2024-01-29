@@ -2,7 +2,6 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.EmployeeBO;
-import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.dto.EmployeeDTO;
 import lk.ijse.elite.dto.tm.EmployeeTM;
@@ -29,23 +27,43 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmployeeFormController {
-    public TableColumn colEmpid;
-    public TableColumn colAdid;
-    public TableColumn colName;
-    public TableColumn colAddress;
-    public TableColumn colMobile;
-    public TableColumn colPosition;
-    public TableColumn colPayment;
-    public TableColumn colSalary;
+
+    @FXML
+    private TableColumn colEmpid;
+
+    @FXML
+    private TableColumn colAdid;
+
+    @FXML
+    private TableColumn colName;
+
+    @FXML
+    private TableColumn colAddress;
+
+    @FXML
+    private TableColumn colMobile;
+
+    @FXML
+    private TableColumn colPosition;
+
+    @FXML
+    private TableColumn colPayment;
+
+    @FXML
+    private TableColumn colSalary;
+
     @FXML
     private TableView<EmployeeTM> tblEmployee;
-    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
+
+    private final EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
 
     public void initialize() {
         cellValueFactory();
         loadAllEmployees();
     }
-    public void btnEmployeemanageOnAction(ActionEvent actionEvent) {
+
+    @FXML
+    private void btnEmployeemanageOnAction() {
         try {
             URL resource = EmployeeManageformController.class.getResource("/view/EmployeeManageform.fxml");
             Parent parent = FXMLLoader.load(resource);
@@ -116,11 +134,13 @@ public class EmployeeFormController {
         }
     }
 
-    public void btnRefeshOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRefeshOnAction() {
         initialize();
     }
 
-    public void btnsalaryDetailsOnAction(ActionEvent actionEvent) throws JRException, SQLException {
+    @FXML
+    private void btnsalaryDetailsOnAction() throws JRException, SQLException {
         InputStream resourceAsStream = getClass().getResourceAsStream("/reports/Salary_details.jrxml");
         JasperDesign load = JRXmlLoader.load(resourceAsStream);
         JasperReport compileReport = JasperCompileManager.compileReport(load);

@@ -2,37 +2,40 @@ package lk.ijse.elite.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
 import lk.ijse.elite.bo.custom.ScheduleBO;
-import lk.ijse.elite.bo.custom.impl.AdminBOImpl;
-import lk.ijse.elite.bo.custom.impl.ScheduleBOImpl;
 import lk.ijse.elite.dto.AdminDTO;
 import lk.ijse.elite.dto.ScheduleDTO;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class SheduleFormController {
-    public Pane bodyPane;
-    public TextField txtSheduleId;
-    public TextField txtTime;
-    public DatePicker txtDate;
-    public ComboBox cmbAdminId;
-    public TextField txtStatus;
-    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
-    AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
+
+    @FXML
+    private TextField txtSheduleId;
+
+    @FXML
+    private TextField txtTime;
+
+    @FXML
+    private DatePicker txtDate;
+
+    @FXML
+    private ComboBox cmbAdminId;
+
+    @FXML
+    private TextField txtStatus;
+
+    private final ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
+
+    private final AdminBO adminBO = (AdminBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ADMIN);
 
     public void initialize(){
         try {
@@ -44,14 +47,19 @@ public class SheduleFormController {
 
         cmbAdminId.getSelectionModel().selectedItemProperty().addListener((observableValue, s, t1) -> {
             try {
-                adminBO.searchAdmin(t1.toString());
+                if (adminBO == null) {
+                    new Alert(Alert.AlertType.ERROR, "AdminBO is not initialized").show();
+                } else {
+                    adminBO.searchAdmin(t1.toString()).getAdmin_id();
+                }
             } catch (SQLException | ClassNotFoundException e) {
-                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
         });
     }
 
-    public void btnAddOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnAddOnAction() {
         String shedule_id = txtSheduleId.getText();
         String admin_id = String.valueOf(cmbAdminId.getValue());
         String date = txtDate.getValue().toString();
@@ -76,7 +84,8 @@ public class SheduleFormController {
         }
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnUpdateOnAction() {
         String shedule_id = txtSheduleId.getText();
         String admin_id = String.valueOf(cmbAdminId.getValue());
         String date = txtDate.getValue().toString();
@@ -108,7 +117,6 @@ public class SheduleFormController {
             for (AdminDTO adminDto  : adminList) {
                 obList.add(adminDto.getAdmin_id());
             }
-
             cmbAdminId.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -127,7 +135,8 @@ public class SheduleFormController {
         return true;
     }
 
-    public void autoGenerateId() throws SQLException, ClassNotFoundException {
+    @FXML
+    private void autoGenerateId() throws SQLException, ClassNotFoundException {
         txtSheduleId.setText(scheduleBO.generateScheduleId());
     }
 }

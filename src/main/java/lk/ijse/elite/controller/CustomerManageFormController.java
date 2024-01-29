@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
@@ -18,14 +19,26 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class CustomerManageFormController {
-    public TextField txtCustomerid;
-    public TextField txtAddress;
-    public TextField txtMobile;
-    public TextField txtEmail;
-    public TextField txtName;
-    public JFXComboBox cmbSheduleid;
-    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
-    ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
+
+    @FXML
+    private TextField txtCustomerid;
+
+    @FXML
+    private TextField txtAddress;
+
+    @FXML
+    private TextField txtMobile;
+
+    @FXML
+    private TextField txtEmail;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private JFXComboBox cmbSheduleid;
+    private final CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+    public final ScheduleBO scheduleBO = (ScheduleBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SCHEDULE);
 
     public void initialize(){
         try {
@@ -36,7 +49,8 @@ public class CustomerManageFormController {
         }
     }
 
-    public void btnSaveOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSaveOnAction() {
         String cid = txtCustomerid.getText();
         String sheduleid = String.valueOf(cmbSheduleid.getValue());
         String name = txtName.getText();
@@ -72,8 +86,8 @@ public class CustomerManageFormController {
         txtEmail.setText("");
     }
 
-
-    public void btnSearchOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnSearchOnAction() {
         String cid = txtCustomerid.getText();
         try {
             CustomerDTO dto = customerBO.searchCustomer(cid);
@@ -97,7 +111,8 @@ public class CustomerManageFormController {
         txtEmail.setText(dto.getEmail());
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnDeleteOnAction() {
         String cid = txtCustomerid.getText();
 
         try{
@@ -118,7 +133,8 @@ public class CustomerManageFormController {
         }
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnUpdateOnAction() {
         String cid = txtCustomerid.getText();
         String sheduleid = String.valueOf(cmbSheduleid.getValue());
         String name = txtName.getText();

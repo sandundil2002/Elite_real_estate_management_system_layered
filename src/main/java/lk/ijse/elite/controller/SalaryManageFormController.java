@@ -3,15 +3,13 @@ package lk.ijse.elite.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.EmployeeBO;
 import lk.ijse.elite.bo.custom.SalaryBO;
-import lk.ijse.elite.bo.custom.impl.EmployeeBOImpl;
-import lk.ijse.elite.bo.custom.impl.SalaryBOImpl;
 import lk.ijse.elite.entity.Employee;
 import lk.ijse.elite.dto.EmployeeDTO;
 import lk.ijse.elite.dto.SalaryDTO;
@@ -20,14 +18,29 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SalaryManageFormController {
-    public TextField txtSalaryid;
-    public TextField txtEmployeeid;
-    public TextField txtName;
-    public JFXComboBox cmdPosition;
-    public DatePicker dtpDate;
-    public TextField txtAmount;
-    SalaryBO salaryBO = (SalaryBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SALARY);
-    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
+
+    @FXML
+    private TextField txtSalaryid;
+
+    @FXML
+    private TextField txtEmployeeid;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private JFXComboBox cmdPosition;
+
+    @FXML
+    private DatePicker dtpDate;
+
+    @FXML
+    private TextField txtAmount;
+
+    private final SalaryBO salaryBO = (SalaryBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SALARY);
+
+    private final EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.EMPLOYEE);
+
 
     public void initialize(){
         try {
@@ -51,12 +64,11 @@ public class SalaryManageFormController {
         
     }
 
-    public void btnPayOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnPayOnAction() {
         String salaryid = txtSalaryid.getText();
         String employeeid = txtEmployeeid.getText();
-        String name = txtName.getText();
         String amount = txtAmount.getText();
-        String position = cmdPosition.getValue().toString();
         String date = dtpDate.getValue().toString();
 
         var dto = new SalaryDTO(salaryid, employeeid, date, amount);
@@ -86,7 +98,8 @@ public class SalaryManageFormController {
         }
     }
 
-    public void btnClearOnAction() {
+    @FXML
+    private void btnClearOnAction() {
         txtSalaryid.clear();
         txtEmployeeid.clear();
         txtName.clear();

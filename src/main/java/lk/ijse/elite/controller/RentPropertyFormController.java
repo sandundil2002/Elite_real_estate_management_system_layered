@@ -3,14 +3,13 @@ package lk.ijse.elite.controller;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.*;
-import lk.ijse.elite.bo.custom.impl.*;
 import lk.ijse.elite.db.DbConnection;
 import lk.ijse.elite.dto.CustomerDTO;
 import lk.ijse.elite.dto.PropertyDTO;
@@ -29,19 +28,41 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RentPropertyFormController {
-    public TextField txtCustomerName;
-    public TextField txtPropertyPrice;
-    public DatePicker txtDate;
-    public TextField txtRentid;
-    public JFXComboBox comProid;
-    public JFXComboBox comCusid;
-    public TextField txtpayId;
-    public ChoiceBox cmdPaymethod;
-    public ChoiceBox cmdDuration;
-    RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
-    CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
-    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
-    PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
+
+    @FXML
+    private TextField txtCustomerName;
+
+    @FXML
+    private TextField txtPropertyPrice;
+
+    @FXML
+    private DatePicker txtDate;
+
+    @FXML
+    private TextField txtRentid;
+
+    @FXML
+    private JFXComboBox comProid;
+
+    @FXML
+    private JFXComboBox comCusid;
+
+    @FXML
+    private TextField txtpayId;
+
+    @FXML
+    private ChoiceBox cmdPaymethod;
+
+    @FXML
+    private ChoiceBox cmdDuration;
+
+    private final RentingBO rentingBO = (RentingBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.RENTING);
+
+    public final CustomerBO customerBO = (CustomerBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CUSTOMER);
+
+    public final PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+
+    public final PropertyBO propertyBO = (PropertyBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PROPERTY);
 
 
     public void initialize(){
@@ -81,12 +102,12 @@ public class RentPropertyFormController {
         cmdDuration.setValue("3 Months");
     }
 
-    public void btnRentOnAction(ActionEvent actionEvent) {
+    @FXML
+    private void btnRentOnAction() {
         String rentId = txtRentid.getText();
         String paymentId = txtpayId.getText();
         String customerId = String.valueOf(comCusid.getValue());
         String propertyId = String.valueOf(comProid.getValue());
-        String name = txtCustomerName.getText();
         String price = txtPropertyPrice.getText();
         String method = String.valueOf(cmdPaymethod.getValue());
         String date = txtDate.getValue().toString();
@@ -109,7 +130,8 @@ public class RentPropertyFormController {
         }
     }
 
-    public void btnRentClearOnAction() {
+    @FXML
+    private void btnRentClearOnAction() {
         txtCustomerName.clear();
         txtPropertyPrice.clear();
     }

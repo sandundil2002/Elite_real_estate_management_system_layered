@@ -9,22 +9,35 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.PaymentBO;
-import lk.ijse.elite.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.elite.dto.PaymentDTO;
 import lk.ijse.elite.dto.tm.PaymentTM;
 import java.sql.SQLException;
 import java.util.List;
 
 public class PaymentsFormController {
-    public TableColumn colPaymentId;
-    public TableColumn colPropertyId;
-    public TableColumn colCustomerId;
-    public TableColumn colDate;
-    public TableColumn colPrice;
-    public TableColumn colMethod;
+
+    @FXML
+    private TableColumn colPaymentId;
+
+    @FXML
+    private TableColumn colPropertyId;
+
+    @FXML
+    private TableColumn colCustomerId;
+
+    @FXML
+    private TableColumn colDate;
+
+    @FXML
+    private TableColumn colPrice;
+
+    @FXML
+    private TableColumn colMethod;
+
     @FXML
     private TableView<PaymentTM> tblPayment;
-    PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
+
+    private final PaymentBO paymentBO = (PaymentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.PAYMENT);
 
     public void initialize() {
         cellValueFactory();

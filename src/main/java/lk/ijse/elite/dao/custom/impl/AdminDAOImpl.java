@@ -52,12 +52,16 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public Admin search(String id) throws SQLException{
         ResultSet resultSet = SQLUtil.sql("SELECT * FROM admin WHERE Admin_id=?",id);
-        resultSet.next();
-            return new Admin(id+ " ",resultSet.getString("name"),
-                    resultSet.getString("otp"),
-                    resultSet.getString("mobile"),
-                    resultSet.getString("password"),
-                    resultSet.getString("email"));
+        if (resultSet.next())
+            return new Admin(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6)
+            );
+        return null;
     }
 
     @Override
