@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.elite.bo.BOFactory;
 import lk.ijse.elite.bo.custom.AdminBO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
