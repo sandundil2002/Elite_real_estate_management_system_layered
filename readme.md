@@ -1,4 +1,4 @@
-<h1 align="center" id="title">Elite Real Estate Management System</h1>
+<h1><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=800&size=54&pause=1000&random=false&width=1100&height=100&lines=Elite+Real+Estate+Management+System" alt="Typing SVG" /></a></h1>
 
 <p align="center"><img src="https://i.ibb.co/VwmYDZ6/DAshboard.png" alt="project-image"></p>
 
